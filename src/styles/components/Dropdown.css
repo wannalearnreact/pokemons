@@ -1,0 +1,9 @@
+.sidebar {
+    padding: 20px;
+    background-color: #f2f2f2;
+    width: 300px;
+}
+
+input[type='checkbox'] {
+    margin-right: 10px;
+}

@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 10rem;
+}
+
+.navbar-brand {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.2rem;
+    content: url('../../assets/icons/logo.svg');
+    width: 64px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+.form input {
+    padding: 1rem 0.1rem 1rem 4rem;
+    font-size: 1rem;
+    border: none;
+    margin-right: 0.5rem;
+    border-radius: 3rem;
+    outline: none;
+    letter-spacing: 0.05rem;
+}
+
+.form img {
+    padding: 1rem;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    cursor: pointer;
+    text-align: center;
+}

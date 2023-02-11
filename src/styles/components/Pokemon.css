@@ -1,0 +1,113 @@
+.remove {
+    display: none;
+}
+.pokemon {
+    width: 300px;
+    height: 500px;
+    background-color: white;
+
+    border-radius: 2rem;
+    text-align: center;
+    /*   border: 0.1px solid black; */
+    box-shadow: 1px -1px 11px 0px rgba(224, 205, 205, 0.96);
+    -webkit-box-shadow: 1px -1px 11px 0px rgba(224, 205, 205, 0.96);
+    -moz-box-shadow: 1px -1px 11px 0px rgba(224, 205, 205, 0.96);
+}
+.pokemon a {
+    text-decoration: none;
+}
+.pokemon span {
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+.pokemon-image {
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    padding: 1rem;
+}
+.pokemon div:last-child {
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+}
+.pokemon-header {
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-family: 'Sansita', sans-serif;
+    letter-spacing: 0.07rem;
+    text-shadow: #fff 0px 0px 2px, rgb(208 177 177) 0px 1px 2px,
+        #fff 0px 0px 15px, 0px 10px 15px rgb(64 59 60 / 0%);
+    text-align: center;
+}
+
+.color-fire {
+    color: #ff7402;
+}
+.color-steel {
+    color: #9eb7b8;
+}
+.color-grass {
+    color: rgb(150 240 210);
+}
+.color-water {
+    color: #4592c4;
+}
+.color-psychic {
+    color: #f366b9;
+}
+.color-ground {
+    color: #ab9842;
+}
+.color-ice {
+    color: #51c4e7;
+}
+.color-flying {
+    color: #3dc7ef;
+}
+.color-ghost {
+    color: #4d5b64;
+}
+.color-normal {
+    color: #a4acaf;
+}
+.color-poison {
+    color: #7e0058;
+}
+.color-rock {
+    color: #a38c21;
+}
+.color-fighting {
+    color: #d56723;
+}
+.color-dark {
+    color: #707070;
+}
+.color-bug {
+    color: #729f3f;
+}
+.color-dragon {
+    color: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
+}
+.color-electric {
+    color: #bba909;
+}
+.color-fairy {
+    color: #fdb9e9;
+}
+.color-shadow {
+    color: #7b62a3;
+}
+.color-unknow {
+    color: #757575;
+}
+
+/* .color-primary {
+   color: #006d77;
+}
+.color-primary-hover {
+   color: #83c5be;
+}
+ */
