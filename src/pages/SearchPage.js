@@ -4,7 +4,7 @@ import { PokemonContext } from '../context/PokemonContext';
 import Pokemon from '../components/Pokemon';
 
 const SearchPage = () => {
-    const { globalPokemons, searchedValue } = useContext(PokemonContext);
+    const { globalPokemons, searchedValue, uuid } = useContext(PokemonContext);
 
     useEffect(() => {}, [searchedValue]);
     return (
@@ -13,7 +13,7 @@ const SearchPage = () => {
                 globalPokemons
                     .filter((p) => p.name.includes(searchedValue))
                     .map((pokemon) => (
-                        <Pokemon key={pokemon.id} pokemon={pokemon} />
+                        <Pokemon key={uuid()} pokemon={pokemon} />
                     ))}
         </div>
     );

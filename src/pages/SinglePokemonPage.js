@@ -8,7 +8,7 @@ import '../styles/colors.css';
 import PokemonStats from '../components/PokemonStats';
 import PokemonTypes from '../components/PokemonTypes';
 const SinglePokemonPage = () => {
-    const { getPokemonByID, setIsLoading, isLoading, checkType } =
+    const { getPokemonByID, setIsLoading, isLoading, uuid } =
         useContext(PokemonContext);
     const [singlePokemon, setSinglePokemon] = useState({});
     const { id } = useParams();
@@ -29,7 +29,6 @@ const SinglePokemonPage = () => {
                 <Skeleton variant='rectangular' width={210} height={118} />
             ) : (
                 <div
-                    key={singlePokemon.id}
                     className={`main bg-${singlePokemon.types?.[0].type.name}`}
                 >
                     <div
@@ -53,7 +52,7 @@ const SinglePokemonPage = () => {
                                 <div>
                                     <span>Abilites</span>
                                     {singlePokemon.abilities?.map((ability) => (
-                                        <div key={singlePokemon.id}>
+                                        <div key={uuid()}>
                                             {ability.ability?.name}
                                         </div>
                                     ))}

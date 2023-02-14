@@ -18,7 +18,7 @@ import psychic from '../assets/icons/psychic.svg';
 import rock from '../assets/icons/rock.svg';
 import steel from '../assets/icons/steel.svg';
 import water from '../assets/icons/water.svg';
-
+import uuid from 'react-uuid';
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
     const [globalPokemons, setGlobalPokemons] = useState([]);
@@ -154,7 +154,7 @@ export const PokemonProvider = ({ children }) => {
 
     const [selectedOption, setSelectedOption] = useState('');
     const [filteredPokemons, setFilteredPokemons] = useState([]);
-    const [newArray, setNewArray] = useState([]);
+
     const options = [
         { value: 'all', label: 'all' },
         { value: 'grass', label: 'grass' },
@@ -177,22 +177,36 @@ export const PokemonProvider = ({ children }) => {
         { value: 'unknow', label: 'unknown' },
         { value: 'shadow', label: 'shadow' },
     ];
-
     const handleChange = (selectedOption) => {
         setSelectedOption(selectedOption);
-
         if (selectedOption.value === 'all') {
             setFilteredPokemons(allPokemons);
         } else {
             setFilteredPokemons(
-                allPokemons.filter((pokemon) =>
-                    pokemon.types.map(
-                        (type) => type.type.name === selectedOption.value
-                    )
-                )
+                allPokemons.filter((pokemon) => {
+                    return (
+                        pokemon.types.filter(
+                            (t) => t.type.name === selectedOption.value
+                        ).length > 0
+                    );
+                })
             );
         }
     };
+
+    /*    const handleChange = (option) => {
+        setSelectedOption(option);
+
+        if (option.value === 'all') {
+            setFilteredPokemons(allPokemons);
+        } else {
+            setFilteredPokemons(
+                allPokemons.filter((pokemon) =>
+                    pokemon.types.map((type) => type.type.name === option.value)
+                )
+            );
+        }
+    }; */
     return (
         <PokemonContext.Provider
             value={{
@@ -210,7 +224,7 @@ export const PokemonProvider = ({ children }) => {
                 selectedOption,
                 filteredPokemons,
                 handleChange,
-                newArray,
+                uuid,
             }}
         >
             {children}

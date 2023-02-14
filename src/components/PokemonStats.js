@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
+import { PokemonContext } from '../context/PokemonContext';
 import '../styles/components/PokemonStats.css';
 const PokemonStats = ({ singlePokemon }) => {
+    const { uuid } = useContext(PokemonContext);
     useEffect(() => {}, [singlePokemon]);
     return (
-        <div
-            key={singlePokemon.id}
-            className={`footer bg-${singlePokemon.types?.[0].type.name}`}
-        >
+        <div className={`footer bg-${singlePokemon.types?.[0].type.name}`}>
             <div>Stats</div>
             <div className='stats'>
                 {singlePokemon.stats?.map((stat) => {
                     return (
-                        <div className='stats-row'>
+                        <div key={uuid()} className='stats-row'>
                             <div>{stat.stat.name}</div>
                             <div>{stat.base_stat}</div>
                             <div

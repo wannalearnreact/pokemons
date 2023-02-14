@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 import '../styles/components/Dropdown.css';
 import Select from 'react-select';
@@ -12,6 +12,7 @@ const Dropdown = () => {
                 onChange={handleChange}
                 options={options}
                 value={selectedOption}
+                /*   defaultValue='all' */
             />
         </div>
     );

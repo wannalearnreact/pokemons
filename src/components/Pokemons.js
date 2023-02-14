@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemons.css';
 
 const Pokemons = ({ pokemons }) => {
-    const { isLoading } = useContext(PokemonContext);
+    const { isLoading, uuid } = useContext(PokemonContext);
 
     return (
         <div>
@@ -17,7 +17,7 @@ const Pokemons = ({ pokemons }) => {
             ) : (
                 <div className='pokemon-container'>
                     {pokemons.map((pokemon) => (
-                        <Pokemon key={pokemon.id} pokemon={pokemon} />
+                        <Pokemon key={uuid()} pokemon={pokemon} />
                     ))}
                 </div>
             )}
