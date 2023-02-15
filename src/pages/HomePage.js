@@ -6,9 +6,7 @@ import { PokemonContext } from '../context/PokemonContext';
 const HomePage = () => {
     const { allPokemons, loadMorePokemons, filteredPokemons, selectedOption } =
         useContext(PokemonContext);
-    {
-        console.log(filteredPokemons);
-    }
+    useEffect(() => {}, [filteredPokemons]);
 
     return (
         <div>

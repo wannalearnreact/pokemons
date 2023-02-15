@@ -86,58 +86,40 @@ export const PokemonProvider = ({ children }) => {
         switch (type) {
             case 'bug':
                 return bug;
-                break;
             case 'dark':
                 return dark;
-                break;
             case 'dragon':
                 return dragon;
-                break;
             case 'electric':
                 return electric;
-                break;
             case 'fairy':
                 return fairy;
-                break;
             case 'fighting':
                 return fighting;
-                break;
             case 'fire':
                 return fire;
-                break;
             case 'flying':
                 return flying;
-                break;
             case 'ghost':
                 return ghost;
-                break;
             case 'grass':
                 return grass;
-                break;
             case 'ground':
                 return ground;
-                break;
             case 'ice':
                 return ice;
-                break;
             case 'normal':
                 return normal;
-                break;
             case 'poison':
                 return poison;
-                break;
             case 'psychic':
                 return psychic;
-                break;
             case 'rock':
                 return rock;
-                break;
             case 'steel':
                 return steel;
-                break;
             case 'water':
                 return water;
-                break;
             default:
                 return null;
         }
@@ -151,9 +133,6 @@ export const PokemonProvider = ({ children }) => {
     }, [offset]);
 
     // DROPDOWN
-
-    const [selectedOption, setSelectedOption] = useState('');
-    const [filteredPokemons, setFilteredPokemons] = useState([]);
 
     const options = [
         { value: 'all', label: 'all' },
@@ -177,6 +156,9 @@ export const PokemonProvider = ({ children }) => {
         { value: 'unknow', label: 'unknown' },
         { value: 'shadow', label: 'shadow' },
     ];
+    const [selectedOption, setSelectedOption] = useState(options[0]);
+    const [filteredPokemons, setFilteredPokemons] = useState([]);
+
     const handleChange = (selectedOption) => {
         setSelectedOption(selectedOption);
         if (selectedOption.value === 'all') {
@@ -194,19 +176,6 @@ export const PokemonProvider = ({ children }) => {
         }
     };
 
-    /*    const handleChange = (option) => {
-        setSelectedOption(option);
-
-        if (option.value === 'all') {
-            setFilteredPokemons(allPokemons);
-        } else {
-            setFilteredPokemons(
-                allPokemons.filter((pokemon) =>
-                    pokemon.types.map((type) => type.type.name === option.value)
-                )
-            );
-        }
-    }; */
     return (
         <PokemonContext.Provider
             value={{
@@ -225,6 +194,7 @@ export const PokemonProvider = ({ children }) => {
                 filteredPokemons,
                 handleChange,
                 uuid,
+                setSelectedOption,
             }}
         >
             {children}
