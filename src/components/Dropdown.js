@@ -7,14 +7,13 @@ const Dropdown = () => {
         useContext(PokemonContext);
     useEffect(() => {}, [selectedOption]);
     return (
-        <div style={{ backgroundColor: 'red', color: 'blue', width: '200px' }}>
-            <Select
-                onChange={handleChange}
-                options={options}
-                value={selectedOption}
-                defaultValue={options[0]}
-            />
-        </div>
+        <Select
+            className='dropdown'
+            onChange={handleChange}
+            options={options}
+            value={selectedOption}
+            defaultValue={options[0]}
+        />
     );
 };
 

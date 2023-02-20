@@ -1,0 +1,9 @@
+.filter {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.filter-img {
+    width: 64px;
+    padding: 0.2rem;
+}

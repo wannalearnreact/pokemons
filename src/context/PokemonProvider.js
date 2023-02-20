@@ -26,6 +26,8 @@ export const PokemonProvider = ({ children }) => {
     const [error, setError] = useState(undefined);
     const [offset, setOffset] = useState(0);
     const [searchedValue, setSearchedValue] = useState('');
+    const [filterActive, setFilterActive] = useState(false);
+    const [sortActive, setSortActive] = useState(null);
 
     const url = 'https://pokeapi.co/api/v2/';
 
@@ -70,7 +72,7 @@ export const PokemonProvider = ({ children }) => {
         setIsLoading(false);
     };
     const loadMorePokemons = (limit) => {
-        setOffset(offset + 5);
+        setOffset(offset + 10);
     };
 
     const getPokemonByID = async (id) => {
@@ -195,6 +197,10 @@ export const PokemonProvider = ({ children }) => {
                 handleChange,
                 uuid,
                 setSelectedOption,
+                setFilterActive,
+                filterActive,
+                setSortActive,
+                sortActive,
             }}
         >
             {children}

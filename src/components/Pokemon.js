@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PokemonContext } from '../context/PokemonContext';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -10,7 +10,6 @@ import PokemonTypes from './PokemonTypes';
 /* import placeholder from '../assets/icons/placeholder.svg'; */
 const Pokemon = ({ pokemon }) => {
     const { isLoading } = useContext(PokemonContext);
-    const navigate = useNavigate();
 
     return (
         <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
@@ -32,7 +31,6 @@ const Pokemon = ({ pokemon }) => {
                     />
                     <h1
                         className={`pokemon-header color-${pokemon.types?.[0].type.name}`}
-                        /* className={`bg-${pokemon.types?.[0].type.name}`} */
                     >
                         {pokemon.name}
                     </h1>

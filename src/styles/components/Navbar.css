@@ -15,7 +15,20 @@
     content: url('../../assets/icons/logo.svg');
     width: 64px;
 }
+.navbar-sort {
+    display: flex;
+    align-items: center;
+}
+.sort-container {
+    display: flex;
+    align-items: center;
+}
 
+.alphabet-sort {
+    content: url('../../assets/icons/alphabet-sort.svg');
+    width: 50px;
+    height: 50px;
+}
 .form {
     display: flex;
     align-items: center;
@@ -30,7 +43,7 @@
     letter-spacing: 0.05rem;
 }
 
-.form img {
+.form-img {
     padding: 1rem;
     width: 64px;
     height: 64px;
