@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { PokemonContext } from '../context/PokemonContext';
 import Skeleton from 'react-loading-skeleton';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemon.css';
 import '../styles/colors.css';

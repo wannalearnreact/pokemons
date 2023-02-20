@@ -9,11 +9,28 @@ const Pokemons = ({ pokemons }) => {
     const { isLoading, uuid, sortActive } = useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {
-        return array
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reduce((acc, cur) => {
+        if (sortActive === false) {
+            return array
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .reduce((acc, cur) => {
+                    return acc.some((p) => p.id === cur.id)
+                        ? acc
+                        : [...acc, cur];
+                }, []);
+        }
+        if (sortActive === true) {
+            return array
+                .sort((b, a) => a.name.localeCompare(b.name))
+                .reduce((acc, cur) => {
+                    return acc.some((p) => p.id === cur.id)
+                        ? acc
+                        : [...acc, cur];
+                }, []);
+        } else {
+            return array.reduce((acc, cur) => {
                 return acc.some((p) => p.id === cur.id) ? acc : [...acc, cur];
             }, []);
+        }
     }
 
     return (
@@ -24,15 +41,9 @@ const Pokemons = ({ pokemons }) => {
                 </div>
             ) : (
                 <div className='pokemon-container'>
-                    {sortActive
-                        ? sortAndRemoveDuplicates(pokemons).map((item) => (
-                              <Pokemon key={uuid()} pokemon={item} />
-                          ))
-                        : sortAndRemoveDuplicates(pokemons)
-                              .reverse()
-                              .map((item) => (
-                                  <Pokemon key={uuid()} pokemon={item} />
-                              ))}
+                    {sortAndRemoveDuplicates(pokemons).map((item) => (
+                        <Pokemon key={uuid()} pokemon={item} />
+                    ))}
                 </div>
             )}
         </div>

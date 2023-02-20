@@ -26,7 +26,9 @@ const SinglePokemonPage = () => {
     return (
         <>
             {isLoading ? (
-                <Skeleton variant='rectangular' width={210} height={118} />
+                <>
+                    <Skeleton variant='rectangular' width={210} height={118} />
+                </>
             ) : (
                 <div
                     className={`main bg-${singlePokemon.types?.[0].type.name}`}

@@ -1,12 +1,11 @@
-.dropdown {
-    color: blue;
-    width: 100px;
-}
+@import '../fonts.css';
 
-/* .css-13cymwt-control {
-    height: 100%;
-} */
-/* */
+.dropdown {
+    margin-left: 0.5rem;
+    color: #333;
+    width: 100px;
+    font-family: 'Sansita', sans-serif;
+}
 
 .css-qbdosj-Input {
     height: 100%;

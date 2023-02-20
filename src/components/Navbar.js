@@ -44,7 +44,7 @@ const Navbar = () => {
                     <img className='form-img ' src={search} alt='' />
                     <input
                         type='text'
-                        placeholder='Search for pokemon'
+                        placeholder='Find pokemon...'
                         aria-label='Search'
                         value={searchedValue}
                         onChange={(e) => {

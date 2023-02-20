@@ -3,7 +3,8 @@
     height: 100vh;
 }
 .pokemon-main {
-    padding: 2rem 10rem;
+    /*   padding: 2rem 10rem; */
+    padding: 6rem 10rem 2rem 10rem;
     display: flex;
     justify-content: space-between;
 }
