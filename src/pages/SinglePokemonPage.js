@@ -7,6 +7,7 @@ import '../styles/pages/SinglePokemon.css';
 import '../styles/colors.css';
 import PokemonStats from '../components/PokemonStats';
 import PokemonTypes from '../components/PokemonTypes';
+import Loading from '../components/Loading';
 const SinglePokemonPage = () => {
     const { getPokemonByID, setIsLoading, isLoading, uuid } =
         useContext(PokemonContext);
@@ -27,7 +28,8 @@ const SinglePokemonPage = () => {
         <>
             {isLoading ? (
                 <>
-                    <Skeleton variant='rectangular' width={210} height={118} />
+                    <Loading />
+                    {/*   <Skeleton variant='rectangular' width={210} height={118} /> */}
                 </>
             ) : (
                 <div

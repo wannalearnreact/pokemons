@@ -1,5 +1,16 @@
-.pokemon {
-    position: relative;
+.loading-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100px;
     width: 100px;
     background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50%);
@@ -8,7 +19,7 @@
     animation: spin 1s linear infinite;
 }
 
-.pokemon::before {
+.loading::before {
     content: '';
     position: absolute;
     height: 8px;
@@ -18,7 +29,7 @@
     transform: translatey(-50%);
 }
 
-.pokemon::after {
+.loading::after {
     content: '';
     position: absolute;
     height: 38px;

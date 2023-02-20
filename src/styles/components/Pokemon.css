@@ -5,7 +5,7 @@
     width: 300px;
     height: 500px;
     background-color: white;
-    /*   border: 5px solid black; */
+    border: 5px solid black;
     border-radius: 2rem;
     text-align: center;
     box-shadow: 1px -1px 11px 0px rgba(224, 205, 205, 0.96);

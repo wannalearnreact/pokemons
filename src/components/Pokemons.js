@@ -4,6 +4,7 @@ import Pokemon from './Pokemon';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemons.css';
+import Loading from './Loading';
 
 const Pokemons = ({ pokemons }) => {
     const { isLoading, uuid, sortActive } = useContext(PokemonContext);
@@ -34,11 +35,28 @@ const Pokemons = ({ pokemons }) => {
     }
 
     return (
-        <div>
+        <>
+            <div className='pokemon-container'>
+                {sortAndRemoveDuplicates(pokemons).map((item) => (
+                    <Pokemon key={uuid()} pokemon={item} />
+                ))}
+            </div>
+        </>
+    );
+};
+
+export default Pokemons;
+
+/*
+
+ <div>
             {isLoading ? (
                 <div>
-                    <Skeleton variant='rectangular' width={210} height={200} />
+                   <Skeleton variant='rectangular' width={210} height={200} /> }
+                    <Loading />
                 </div>
+
+                 
             ) : (
                 <div className='pokemon-container'>
                     {sortAndRemoveDuplicates(pokemons).map((item) => (
@@ -47,7 +65,5 @@ const Pokemons = ({ pokemons }) => {
                 </div>
             )}
         </div>
-    );
-};
 
-export default Pokemons;
+    */
