@@ -127,13 +127,19 @@ export const PokemonProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
+    /*     useEffect(() => {
         fetchAllPokemons();
     }, [offset]);
     useEffect(() => {
         fetchGlobalPokemons();
-    }, [offset]);
+    }, [offset]); */
 
+    useEffect(() => {
+        setIsLoading(true);
+        Promise.all([fetchAllPokemons(), fetchGlobalPokemons()]).finally(() =>
+            setIsLoading(false)
+        );
+    }, [offset]);
     // DROPDOWN
 
     const options = [

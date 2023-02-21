@@ -35,35 +35,16 @@ const Pokemons = ({ pokemons }) => {
     }
 
     return (
-        <>
-            <div className='pokemon-container'>
-                {sortAndRemoveDuplicates(pokemons).map((item) => (
-                    <Pokemon key={uuid()} pokemon={item} />
-                ))}
-            </div>
-        </>
+        <div className='pokemon-container'>
+            {isLoading
+                ? Array.from({ length: 10 }).map((i) => (
+                      <Loading key={i} height='500px' />
+                  ))
+                : sortAndRemoveDuplicates(pokemons).map((item) => (
+                      <Pokemon key={uuid()} pokemon={item} />
+                  ))}
+        </div>
     );
 };
 
 export default Pokemons;
-
-/*
-
- <div>
-            {isLoading ? (
-                <div>
-                   <Skeleton variant='rectangular' width={210} height={200} /> }
-                    <Loading />
-                </div>
-
-                 
-            ) : (
-                <div className='pokemon-container'>
-                    {sortAndRemoveDuplicates(pokemons).map((item) => (
-                        <Pokemon key={uuid()} pokemon={item} />
-                    ))}
-                </div>
-            )}
-        </div>
-
-    */

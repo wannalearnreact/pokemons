@@ -1,3 +1,5 @@
+@import '../fonts.css';
+
 .btn-container {
     text-align: center;
 }
@@ -12,6 +14,7 @@
     font-weight: bold;
     letter-spacing: 0.05rem;
     border-radius: 3rem;
+    font-family: 'Sansita', sans-serif;
 }
 
 .btn:hover,

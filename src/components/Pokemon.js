@@ -14,27 +14,21 @@ const Pokemon = ({ pokemon }) => {
 
     return (
         <div>
-            {isLoading ? (
-                <>
-                    <Loading />
-                </>
-            ) : (
-                <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
-                    <Link to={`/pokemon/${pokemon.id}`}>
-                        <img
-                            className='pokemon-image'
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-                            alt={`Pokemon ${pokemon?.name}`}
-                        />
-                        <h1
-                            className={`pokemon-header color-${pokemon.types?.[0].type.name}`}
-                        >
-                            {pokemon.name}
-                        </h1>
-                        <PokemonTypes pokemon={pokemon} justify='justify' />
-                    </Link>
-                </div>
-            )}
+            <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
+                <Link to={`/pokemon/${pokemon.id}`}>
+                    <img
+                        className='pokemon-image'
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
+                        alt={`Pokemon ${pokemon?.name}`}
+                    />
+                    <h1
+                        className={`pokemon-header color-${pokemon.types?.[0].type.name}`}
+                    >
+                        {pokemon.name}
+                    </h1>
+                    <PokemonTypes pokemon={pokemon} justify='justify' />
+                </Link>
+            </div>
         </div>
     );
 };
