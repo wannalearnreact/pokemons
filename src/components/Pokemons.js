@@ -7,7 +7,7 @@ import '../styles/components/Pokemons.css';
 import Loading from './Loading';
 
 const Pokemons = ({ pokemons }) => {
-    const { isLoading, uuid, sortActive } = useContext(PokemonContext);
+    const { isLoading, uuid, sortActive, motion } = useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {
         if (sortActive === false) {
@@ -38,7 +38,7 @@ const Pokemons = ({ pokemons }) => {
         <div className='pokemon-container'>
             {isLoading
                 ? Array.from({ length: 10 }).map((i) => (
-                      <Loading key={i} height='500px' />
+                      <Loading key={i} height='300px' />
                   ))
                 : sortAndRemoveDuplicates(pokemons).map((item) => (
                       <Pokemon key={uuid()} pokemon={item} />

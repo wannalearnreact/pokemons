@@ -10,10 +10,10 @@ import PokemonTypes from './PokemonTypes';
 import Loading from './Loading';
 
 const Pokemon = ({ pokemon }) => {
-    const { isLoading } = useContext(PokemonContext);
+    const { isLoading, motion } = useContext(PokemonContext);
 
     return (
-        <div>
+        <divt>
             <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
                 <Link to={`/pokemon/${pokemon.id}`}>
                     <img
@@ -29,7 +29,7 @@ const Pokemon = ({ pokemon }) => {
                     <PokemonTypes pokemon={pokemon} justify='justify' />
                 </Link>
             </div>
-        </div>
+        </divt>
     );
 };
 

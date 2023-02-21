@@ -19,6 +19,8 @@ import rock from '../assets/icons/rock.svg';
 import steel from '../assets/icons/steel.svg';
 import water from '../assets/icons/water.svg';
 import uuid from 'react-uuid';
+
+import { motion } from 'framer-motion';
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
     const [globalPokemons, setGlobalPokemons] = useState([]);
@@ -45,7 +47,8 @@ export const PokemonProvider = ({ children }) => {
             });
             const results = await Promise.all(promises);
 
-            setAllPokemons([...allPokemons, ...results]);
+            /* setAllPokemons([...allPokemons, ...results]); */
+            setAllPokemons((allPokemons) => [...allPokemons, ...results]);
         } catch (error) {
             setError(error.message || 'Something went wrong');
         }
@@ -207,6 +210,7 @@ export const PokemonProvider = ({ children }) => {
                 filterActive,
                 setSortActive,
                 sortActive,
+                motion,
             }}
         >
             {children}
