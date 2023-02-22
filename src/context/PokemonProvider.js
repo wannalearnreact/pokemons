@@ -20,7 +20,7 @@ import steel from '../assets/icons/steel.svg';
 import water from '../assets/icons/water.svg';
 import uuid from 'react-uuid';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
     const [globalPokemons, setGlobalPokemons] = useState([]);

@@ -13,23 +13,27 @@ const Pokemon = ({ pokemon }) => {
     const { isLoading, motion } = useContext(PokemonContext);
 
     return (
-        <divt>
-            <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
-                <Link to={`/pokemon/${pokemon.id}`}>
-                    <img
-                        className='pokemon-image'
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-                        alt={`Pokemon ${pokemon?.name}`}
-                    />
-                    <h1
-                        className={`pokemon-header color-${pokemon.types?.[0].type.name}`}
-                    >
-                        {pokemon.name}
-                    </h1>
-                    <PokemonTypes pokemon={pokemon} justify='justify' />
-                </Link>
-            </div>
-        </divt>
+        <motion.div
+            Layout
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
+        >
+            <Link to={`/pokemon/${pokemon.id}`}>
+                <img
+                    className='pokemon-image'
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
+                    alt={`Pokemon ${pokemon?.name}`}
+                />
+                <h1
+                    className={`pokemon-header color-${pokemon.types?.[0].type.name}`}
+                >
+                    {pokemon.name}
+                </h1>
+                <PokemonTypes pokemon={pokemon} justify='justify' />
+            </Link>
+        </motion.div>
     );
 };
 

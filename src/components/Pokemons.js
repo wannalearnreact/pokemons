@@ -35,7 +35,7 @@ const Pokemons = ({ pokemons }) => {
     }
 
     return (
-        <div className='pokemon-container'>
+        <motion.div layout className='pokemon-container'>
             {isLoading
                 ? Array.from({ length: 10 }).map((i) => (
                       <Loading key={i} height='300px' />
@@ -43,7 +43,7 @@ const Pokemons = ({ pokemons }) => {
                 : sortAndRemoveDuplicates(pokemons).map((item) => (
                       <Pokemon key={uuid()} pokemon={item} />
                   ))}
-        </div>
+        </motion.div>
     );
 };
 

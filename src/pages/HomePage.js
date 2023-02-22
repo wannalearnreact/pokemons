@@ -4,8 +4,13 @@ import Pokemons from '../components/Pokemons';
 import { PokemonContext } from '../context/PokemonContext';
 
 const HomePage = () => {
-    const { allPokemons, loadMorePokemons, filteredPokemons, selectedOption } =
-        useContext(PokemonContext);
+    const {
+        allPokemons,
+        loadMorePokemons,
+        filteredPokemons,
+        selectedOption,
+        motion,
+    } = useContext(PokemonContext);
 
     useEffect(() => {}, [filteredPokemons]);
 
