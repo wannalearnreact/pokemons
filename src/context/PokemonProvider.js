@@ -53,6 +53,7 @@ export const PokemonProvider = ({ children }) => {
             setError(error.message || 'Something went wrong');
         }
         setIsLoading(false);
+        console.log('prvi');
     };
     const fetchGlobalPokemons = async (limit = 10000) => {
         try {
@@ -73,6 +74,7 @@ export const PokemonProvider = ({ children }) => {
             setError(error.message || 'Something went wrong');
         }
         setIsLoading(false);
+        console.log('drugi');
     };
     const loadMorePokemons = (limit) => {
         setOffset(offset + 10);
@@ -130,7 +132,7 @@ export const PokemonProvider = ({ children }) => {
         }
     };
 
-    /*     useEffect(() => {
+    /*  useEffect(() => {
         fetchAllPokemons();
     }, [offset]);
     useEffect(() => {

@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 import Pokemon from './Pokemon';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemons.css';
 import Loading from './Loading';
@@ -35,7 +34,7 @@ const Pokemons = ({ pokemons }) => {
     }
 
     return (
-        <motion.div layout className='pokemon-container'>
+        <div className='pokemon-container'>
             {isLoading
                 ? Array.from({ length: 10 }).map((i) => (
                       <Loading key={i} height='300px' />
@@ -43,7 +42,7 @@ const Pokemons = ({ pokemons }) => {
                 : sortAndRemoveDuplicates(pokemons).map((item) => (
                       <Pokemon key={uuid()} pokemon={item} />
                   ))}
-        </motion.div>
+        </div>
     );
 };
 
