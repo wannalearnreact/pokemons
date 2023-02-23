@@ -9,9 +9,14 @@ const HomePage = () => {
         loadMorePokemons,
         filteredPokemons,
         selectedOption,
-        motion,
+        fetchAllPokemons,
+        offset,
+        setIsLoading,
     } = useContext(PokemonContext);
-
+    useEffect(() => {
+        setIsLoading(true);
+        fetchAllPokemons();
+    }, [offset]);
     useEffect(() => {}, [filteredPokemons]);
 
     return (

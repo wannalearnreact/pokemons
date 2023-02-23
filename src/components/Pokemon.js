@@ -10,7 +10,10 @@ const Pokemon = ({ pokemon }) => {
     const { isLoading, motion } = useContext(PokemonContext);
 
     return (
-        <div className={pokemon.id >= 650 ? 'remove' : ' pokemon'}>
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
+        >
             <Link to={`/pokemon/${pokemon.id}`}>
                 <img
                     className='pokemon-image'
@@ -24,7 +27,7 @@ const Pokemon = ({ pokemon }) => {
                 </h1>
                 <PokemonTypes pokemon={pokemon} justify='justify' />
             </Link>
-        </div>
+        </motion.div>
     );
 };
 

@@ -134,17 +134,18 @@ export const PokemonProvider = ({ children }) => {
 
     /*  useEffect(() => {
         fetchAllPokemons();
-    }, [offset]);
-    useEffect(() => {
-        fetchGlobalPokemons();
     }, [offset]); */
 
     useEffect(() => {
+        fetchGlobalPokemons();
+    }, []);
+
+    /*   useEffect(() => {
         setIsLoading(true);
         Promise.all([fetchAllPokemons(), fetchGlobalPokemons()]).finally(() =>
             setIsLoading(false)
         );
-    }, [offset]);
+    }, [offset]); */
     // DROPDOWN
 
     const options = [
@@ -213,6 +214,9 @@ export const PokemonProvider = ({ children }) => {
                 setSortActive,
                 sortActive,
                 motion,
+                fetchGlobalPokemons,
+                fetchAllPokemons,
+                offset,
             }}
         >
             {children}
