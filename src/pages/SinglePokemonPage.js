@@ -29,7 +29,6 @@ const SinglePokemonPage = () => {
             {isLoading ? (
                 <>
                     <Loading />
-                    {/*   <Skeleton variant='rectangular' width={210} height={118} /> */}
                 </>
             ) : (
                 <div

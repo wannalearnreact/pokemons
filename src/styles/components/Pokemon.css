@@ -42,7 +42,11 @@
         #fff 0px 0px 15px, 0px 10px 15px rgb(64 59 60 / 0%);
     text-align: center;
 }
-
+.pokemon-favourite {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
 .color-fire {
     color: #ff7402;
 }

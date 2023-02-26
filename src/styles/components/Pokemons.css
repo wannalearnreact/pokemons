@@ -3,8 +3,8 @@
     /*   grid-template-columns: auto auto auto auto; */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 100px;
-    /*  padding: 4rem 10rem; */
-    padding: 8rem 10rem 4rem 10rem;
+    padding: 4rem 10rem;
+
     animation: 5s infinite;
     margin: 0 auto;
 }

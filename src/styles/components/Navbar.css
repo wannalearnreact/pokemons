@@ -8,11 +8,14 @@
     background-color: #333;
     color: #fff;
     padding: 0.5rem 10rem;
-    position: fixed;
     width: 100%;
     z-index: 5;
 }
-
+.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 .navbar-brand {
     color: #fff;
     text-decoration: none;

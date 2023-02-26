@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -17,18 +17,48 @@ const Navbar = () => {
         sortActive,
         setSortActive,
     } = useContext(PokemonContext);
+
+    const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
+
+    const handleScroll = () => {
+        const offset = window.scrollY;
+
+        if (offset > 1000) {
+            setScrolled(true);
+        } else {
+            setScrolled(false);
+        }
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
         navigate('/search');
     };
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(() => {}, [searchedValue, filteredPokemons]);
+
     return (
-        <nav className='navbar'>
+        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div style={{ display: 'flex' }}>
                 <Link to='/' className='navbar-brand' />
+                <Link
+                    to='/favourites'
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}
+                >
+                    Fav
+                </Link>
                 {filterActive && (
                     <div className='sort-container'>
                         <Dropdown />

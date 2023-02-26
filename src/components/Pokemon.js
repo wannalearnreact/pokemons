@@ -5,15 +5,45 @@ import PokemonTypes from './PokemonTypes';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemon.css';
 import '../styles/colors.css';
-
+import addFavourite from '../assets/icons/bookmark-add.svg';
+import removeFavourite from '../assets/icons/bookmark-remove.svg';
 const Pokemon = ({ pokemon }) => {
-    const { isLoading, motion } = useContext(PokemonContext);
+    const { motion, favouritePokemons, setFavouritePokemons } =
+        useContext(PokemonContext);
+
+    const isFavourite = favouritePokemons.includes(pokemon.id);
+
+    const handlePokemonClick = (id) => {
+        if (isFavourite) {
+            setFavouritePokemons(
+                favouritePokemons.filter((favId) => favId !== id)
+            );
+        } else {
+            setFavouritePokemons([...favouritePokemons, id]);
+        }
+    };
 
     return (
         <motion.div
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
         >
+            <div
+                onClick={() => handlePokemonClick(pokemon.id)}
+                className='pokemon-favourite'
+            >
+                {isFavourite ? (
+                    <img
+                        style={{ width: '64px', height: '64px' }}
+                        src={removeFavourite}
+                    />
+                ) : (
+                    <img
+                        style={{ width: '64px', height: '64px' }}
+                        src={addFavourite}
+                    />
+                )}
+            </div>
             <Link to={`/pokemon/${pokemon.id}`}>
                 <img
                     className='pokemon-image'
