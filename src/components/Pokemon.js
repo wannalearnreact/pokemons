@@ -8,18 +8,16 @@ import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 const Pokemon = ({ pokemon }) => {
-    const { motion, favouritePokemons, setFavouritePokemons } =
+    const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
 
-    const isFavourite = favouritePokemons.includes(pokemon.id);
+    const isFavourite = favouriteIDs.includes(pokemon.id);
 
     const handlePokemonClick = (id) => {
         if (isFavourite) {
-            setFavouritePokemons(
-                favouritePokemons.filter((favId) => favId !== id)
-            );
+            setFavouriteIDs(favouriteIDs.filter((favId) => favId !== id));
         } else {
-            setFavouritePokemons([...favouritePokemons, id]);
+            setFavouriteIDs([...favouriteIDs, id]);
         }
     };
 

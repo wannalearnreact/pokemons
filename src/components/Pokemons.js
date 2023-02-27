@@ -6,7 +6,7 @@ import '../styles/components/Pokemons.css';
 import Loading from './Loading';
 
 const Pokemons = ({ pokemons }) => {
-    const { isLoading, uuid, sortActive, motion, favouritePokemons } =
+    const { isLoading, uuid, sortActive, motion, favouriteIDs } =
         useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {
@@ -34,7 +34,7 @@ const Pokemons = ({ pokemons }) => {
         }
     }
     {
-        console.log('favouritePokemons', favouritePokemons);
+        console.log('favouritePokemons', favouriteIDs);
     }
     return (
         <div className='pokemon-container'>

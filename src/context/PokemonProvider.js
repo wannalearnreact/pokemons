@@ -30,7 +30,7 @@ export const PokemonProvider = ({ children }) => {
     const [searchedValue, setSearchedValue] = useState('');
     const [filterActive, setFilterActive] = useState(false);
     const [sortActive, setSortActive] = useState(null);
-    const [favouritePokemons, setFavouritePokemons] = useState([]);
+    const [favouriteIDs, setFavouriteIDs] = useState([]);
 
     const url = 'https://pokeapi.co/api/v2/';
 
@@ -218,8 +218,8 @@ export const PokemonProvider = ({ children }) => {
                 fetchGlobalPokemons,
                 fetchAllPokemons,
                 offset,
-                setFavouritePokemons,
-                favouritePokemons,
+                setFavouriteIDs,
+                favouriteIDs,
             }}
         >
             {children}

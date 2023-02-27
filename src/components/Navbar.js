@@ -7,7 +7,7 @@ import Button from './Button';
 import search from '../assets/images/search.png';
 import Dropdown from './Dropdown';
 import Filter from '../components/Filter';
-
+import favourites from '../assets/images/favourites.png';
 const Navbar = () => {
     const {
         searchedValue,
@@ -49,7 +49,7 @@ const Navbar = () => {
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div style={{ display: 'flex' }}>
                 <Link to='/' className='navbar-brand' />
-                <Link
+                {/*  <Link
                     to='/favourites'
                     style={{
                         display: 'flex',
@@ -57,8 +57,8 @@ const Navbar = () => {
                         cursor: 'pointer',
                     }}
                 >
-                    Fav
-                </Link>
+                    <img style={{ width: '64px' }} src={favourites} alt='' />
+                </Link> */}
                 {filterActive && (
                     <div className='sort-container'>
                         <Dropdown />
@@ -70,6 +70,16 @@ const Navbar = () => {
                 )}
             </div>
             <div className='navbar-sort'>
+                <Link
+                    to='/favourites'
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                    }}
+                >
+                    <img style={{ width: '50px' }} src={favourites} alt='' />
+                </Link>
                 <form className='form'>
                     <img className='form-img ' src={search} alt='' />
                     <input
