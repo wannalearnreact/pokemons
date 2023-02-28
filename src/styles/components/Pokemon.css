@@ -44,8 +44,8 @@
 }
 .pokemon-favourite {
     position: absolute;
-    right: 0;
     cursor: pointer;
+    right: 0;
 }
 .color-fire {
     color: #ff7402;

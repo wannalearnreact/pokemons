@@ -4,6 +4,7 @@ import { PokemonContext } from '../context/PokemonContext';
 import Pokemons from '../components/Pokemons';
 import Info from '../components/Info';
 import Button from '../components/Button';
+/* import '../styles/pages/FavouritesPage.css'; */
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
@@ -24,6 +25,9 @@ const FavouritesPage = () => {
         <div>
             {favouritePokemons.length > 0 ? (
                 <>
+                    <h1>
+                        You have {favouritePokemons.length} favourite Pokemons
+                    </h1>
                     <Pokemons pokemons={favouritePokemons} />
                     <Button
                         btnFunction={emptyFavourites}

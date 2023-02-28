@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PokemonContext } from '../context/PokemonContext';
 import PokemonTypes from './PokemonTypes';
@@ -9,6 +9,7 @@ import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 
 const Pokemon = ({ pokemon }) => {
+    const [isShown, setIsShown] = useState(false);
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
 
@@ -24,17 +25,20 @@ const Pokemon = ({ pokemon }) => {
 
     return (
         <motion.div
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
         >
-            <div>
+            {isShown && (
                 <img
                     onClick={() => handlePokemonClick(pokemon.id)}
-                    className='pokemon-favourite'
+                    /*  className='pokemon-favourite' */
+                    className={`${isShown ? 'pokemon-favourite' : ''}`}
                     style={{ width: '64px', height: '64px' }}
                     src={isFavourite ? removeFavourite : addFavourite}
                 />
-            </div>
+            )}
 
             <Link to={`/pokemon/${pokemon.id}`}>
                 <img

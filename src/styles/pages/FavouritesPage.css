@@ -1,21 +1,16 @@
-@import '../fonts.css';
-.info-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 80px);
-}
+/* @import '../fonts.css';
 
-.info {
+h1 {
     background-color: white;
     color: #333;
-    font-size: 5rem;
+    font-size: 2rem;
     font-family: 'Sansita', sans-serif;
     text-align: center;
-    /*  background-color: rgb(173, 167, 167); */
+    /*  background-color: rgb(173, 167, 167); 
     border-radius: 10px;
     padding: 40px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     max-width: 500px;
     margin: 0 auto;
 }
+ */
