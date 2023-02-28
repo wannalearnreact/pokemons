@@ -27,22 +27,15 @@ const Pokemon = ({ pokemon }) => {
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
         >
-            <div
-                onClick={() => handlePokemonClick(pokemon.id)}
-                className='pokemon-favourite'
-            >
-                {isFavourite ? (
-                    <img
-                        style={{ width: '64px', height: '64px' }}
-                        src={removeFavourite}
-                    />
-                ) : (
-                    <img
-                        style={{ width: '64px', height: '64px' }}
-                        src={addFavourite}
-                    />
-                )}
+            <div>
+                <img
+                    onClick={() => handlePokemonClick(pokemon.id)}
+                    className='pokemon-favourite'
+                    style={{ width: '64px', height: '64px' }}
+                    src={isFavourite ? removeFavourite : addFavourite}
+                />
             </div>
+
             <Link to={`/pokemon/${pokemon.id}`}>
                 <img
                     className='pokemon-image'
