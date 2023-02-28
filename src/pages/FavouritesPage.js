@@ -4,7 +4,7 @@ import { PokemonContext } from '../context/PokemonContext';
 import Pokemons from '../components/Pokemons';
 import Info from '../components/Info';
 import Button from '../components/Button';
-/* import '../styles/pages/FavouritesPage.css'; */
+import '../styles/pages/FavouritesPage.css';
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
@@ -28,6 +28,10 @@ const FavouritesPage = () => {
                     <h1>
                         You have {favouritePokemons.length} favourite Pokemons
                     </h1>
+                    <Info
+                        text={`You have ${favouritePokemons.length} favourite Pokemons`}
+                        fontSize='2rem'
+                    />
                     <Pokemons pokemons={favouritePokemons} />
                     <Button
                         btnFunction={emptyFavourites}
@@ -35,7 +39,11 @@ const FavouritesPage = () => {
                     />
                 </>
             ) : (
-                <Info text='There are no favourites...' />
+                <Info
+                    text='There are no favourites...'
+                    height='calc(100vh - 80px)'
+                    fontSize='5rem'
+                />
             )}
 
             {}
