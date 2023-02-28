@@ -7,6 +7,7 @@ import '../styles/components/Pokemon.css';
 import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
+
 const Pokemon = ({ pokemon }) => {
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
