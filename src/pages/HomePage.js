@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Pokemons from '../components/Pokemons';
 import { PokemonContext } from '../context/PokemonContext';
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase.js';
 const HomePage = () => {
     const {
         allPokemons,
@@ -12,12 +13,27 @@ const HomePage = () => {
         fetchAllPokemons,
         offset,
         setIsLoading,
+        user,
+        setUser,
     } = useContext(PokemonContext);
+
     useEffect(() => {
         setIsLoading(true);
         fetchAllPokemons();
     }, [offset]);
+
     useEffect(() => {}, [filteredPokemons]);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (firebaseUser) => {
+            if (firebaseUser) {
+                // User is signed in
+                const uid = firebaseUser.uid;
+            } else {
+                // User is signed out
+            }
+        });
+    }, [setUser]);
 
     return (
         <div>
@@ -33,6 +49,14 @@ const HomePage = () => {
                     btnFunction={loadMorePokemons}
                 />
             )}
+
+            {/*  <div style={{ backgroundColor: 'white', height: '100px' }}>
+                {user ? (
+                    <div>You are logged in as {user}</div>
+                ) : (
+                    <div>You are not logged in</div>
+                )}
+            </div> */}
         </div>
     );
 };

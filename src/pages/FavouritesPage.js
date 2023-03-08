@@ -6,7 +6,7 @@ import Info from '../components/Info';
 import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
 const FavouritesPage = () => {
-    const { favouriteIDs, globalPokemons, setFavouriteIDs } =
+    const { favouriteIDs, globalPokemons, setFavouriteIDs, user } =
         useContext(PokemonContext);
     const [favouritePokemons, setFavouritePokemons] = useState([]);
 
@@ -29,7 +29,11 @@ const FavouritesPage = () => {
                         You have {favouritePokemons.length} favourite Pokemons
                     </h1>
                     <Info
-                        text={`You have ${favouritePokemons.length} favourite Pokemons`}
+                        text={`You have ${favouritePokemons.length} favourite ${
+                            favouritePokemons.length === 1
+                                ? 'pokemon'
+                                : 'pokemons'
+                        }`}
                         fontSize='2rem'
                     />
                     <Pokemons pokemons={favouritePokemons} />

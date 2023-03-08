@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PokemonContext } from '../context/PokemonContext';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/pages/SinglePokemon.css';
 import '../styles/colors.css';

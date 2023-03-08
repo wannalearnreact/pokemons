@@ -19,8 +19,11 @@ import rock from '../assets/icons/rock.svg';
 import steel from '../assets/icons/steel.svg';
 import water from '../assets/icons/water.svg';
 import uuid from 'react-uuid';
+import { motion } from 'framer-motion';
 
-import { motion, AnimatePresence } from 'framer-motion';
+//firebase
+import { auth } from '../firebase';
+import db from '../firebase';
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
     const [globalPokemons, setGlobalPokemons] = useState([]);
@@ -31,6 +34,7 @@ export const PokemonProvider = ({ children }) => {
     const [filterActive, setFilterActive] = useState(false);
     const [sortActive, setSortActive] = useState(null);
     const [favouriteIDs, setFavouriteIDs] = useState([]);
+    const [user, setUser] = useState(false);
 
     const url = 'https://pokeapi.co/api/v2/';
 
@@ -191,6 +195,9 @@ export const PokemonProvider = ({ children }) => {
         }
     };
 
+    {
+        console.log('user', user, 'has logged in');
+    }
     return (
         <PokemonContext.Provider
             value={{
@@ -220,6 +227,8 @@ export const PokemonProvider = ({ children }) => {
                 offset,
                 setFavouriteIDs,
                 favouriteIDs,
+                user,
+                setUser,
             }}
         >
             {children}
