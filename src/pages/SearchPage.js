@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+
 import Pokemon from '../components/Pokemon';
+import { PokemonContext } from '../context/PokemonProvider';
 
 const SearchPage = () => {
     const { globalPokemons, searchedValue, uuid } = useContext(PokemonContext);

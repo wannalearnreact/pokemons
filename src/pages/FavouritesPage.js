@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+
 import Pokemons from '../components/Pokemons';
 import Info from '../components/Info';
 import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
+import { PokemonContext } from '../context/PokemonProvider';
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs, user } =
         useContext(PokemonContext);

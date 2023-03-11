@@ -1,52 +1,49 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
-import Register from './Register';
 
-const Login = () => {
-    const { login, authErrorMessages, profile, user } = useContext(AuthContext);
-    const navigate = useNavigate();
+const Register = () => {
+    const { register, authErrorMessages } = useContext(AuthContext);
 
+    const [displayName, setDisplayName] = useState(''); // input field value cannot be null
     const [email, setEmail] = useState(''); // input field value cannot be null
     const [password, setPassword] = useState(''); // input field value cannot be null
 
-    const [loginRunning, setLoginRunning] = useState(false);
+    const [registrationRunning, setRegistrationRunning] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [showRegisterForm, setShowRegisterForm] = useState(false);
 
     const handleButtonClick = async () => {
-        setLoginRunning(true);
-        let success = await login(email, password);
-        setLoginRunning(false);
-        navigate('/');
-        console.log('user is', user, 'and profile is', profile);
+        setRegistrationRunning(true);
+
+        let theDisplayName = displayName;
+        if (theDisplayName?.length <= 0) {
+            theDisplayName = 'NO DISPLAY NAME PROVIDED 😟';
+        }
+
+        let success = await register(email, password, theDisplayName);
+        setRegistrationRunning(false);
         if (!success) {
             setErrorMessage('Registration failed!');
         }
     };
 
-    const toggleShowRegisterScreen = () => {
-        setShowRegisterForm((currVal) => !currVal);
-    };
-
-    if (showRegisterForm) {
-        return (
-            <div>
-                <Register />
-                <br />
-                <br />
-                <button onClick={toggleShowRegisterScreen}>
-                    Sign In To Existing Account
-                </button>
-            </div>
-        );
-    }
-
     return (
         <div style={{ backgroundColor: 'white' }}>
-            <h2>Sign In To Existing Account</h2>
+            <h2>Register New Account</h2>
             <table>
                 <tbody>
+                    <tr>
+                        <td>
+                            <label>display name:</label>
+                        </td>
+                        <td>
+                            <input
+                                type='text'
+                                name='displayName'
+                                value={displayName}
+                                onChange={(e) => setDisplayName(e.target.value)}
+                            />
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>email:</label>
@@ -74,15 +71,15 @@ const Login = () => {
                         </td>
                     </tr>
                     <tr>
-                        {!loginRunning ? (
+                        {!registrationRunning ? (
                             <td colSpan={2} style={{ textAlign: 'center' }}>
                                 <button
                                     style={{ width: '75%' }}
                                     onClick={handleButtonClick}
                                 >
-                                    Login
+                                    Create User
                                 </button>
-                                {(errorMessage || authErrorMessages) && (
+                                {errorMessage && (
                                     <>
                                         <br />
                                         <h3 style={{ color: 'red' }}>
@@ -104,19 +101,14 @@ const Login = () => {
                         ) : (
                             <td>
                                 <h6 style={{ color: 'green' }}>
-                                    <em>logging in...</em>
+                                    <em>registering...</em>
                                 </h6>
                             </td>
                         )}
                     </tr>
                 </tbody>
             </table>
-            <br />
-            <br />
-            <button onClick={toggleShowRegisterScreen}>
-                Register New Account
-            </button>
         </div>
     );
 };
-export default Login;
+export default Register;

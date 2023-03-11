@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PokemonContext } from '../context/PokemonContext';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/pages/SinglePokemon.css';
 import '../styles/colors.css';
 import PokemonStats from '../components/PokemonStats';
 import PokemonTypes from '../components/PokemonTypes';
 import Loading from '../components/Loading';
+import { PokemonContext } from '../context/PokemonProvider';
 const SinglePokemonPage = () => {
     const { getPokemonByID, setIsLoading, isLoading, uuid } =
         useContext(PokemonContext);

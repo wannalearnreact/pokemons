@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PokemonContext } from './PokemonContext';
+
 import bug from '../assets/icons/bug.svg';
 import dark from '../assets/icons/dark.svg';
 import dragon from '../assets/icons/dragon.svg';
@@ -22,8 +22,9 @@ import uuid from 'react-uuid';
 import { motion } from 'framer-motion';
 
 //firebase
-import { auth } from '../firebase';
-import db from '../firebase';
+
+import { createContext } from 'react';
+export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
     const [globalPokemons, setGlobalPokemons] = useState([]);

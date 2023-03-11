@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PokemonContext } from '../context/PokemonContext';
+
 import PokemonTypes from './PokemonTypes';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemon.css';
 import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
+import { PokemonContext } from '../context/PokemonProvider';
 
 const Pokemon = ({ pokemon }) => {
     const [isShown, setIsShown] = useState(false);

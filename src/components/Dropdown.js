@@ -1,7 +1,8 @@
 import { useContext, useEffect } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+
 import '../styles/components/Dropdown.css';
 import Select from 'react-select';
+import { PokemonContext } from '../context/PokemonProvider';
 const Dropdown = () => {
     const { handleChange, selectedOption, options } =
         useContext(PokemonContext);

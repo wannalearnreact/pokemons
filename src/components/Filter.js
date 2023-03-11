@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import filter from '../assets/icons/filter.svg';
-import { PokemonContext } from '../context/PokemonContext';
+import { PokemonContext } from '../context/PokemonProvider';
+
 import '../styles/components/Filter.css';
 const Filter = () => {
     const { setFilterActive, filterActive } = useContext(PokemonContext);

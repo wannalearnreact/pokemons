@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import Button from '../components/Button';
 import Pokemons from '../components/Pokemons';
-import { PokemonContext } from '../context/PokemonContext';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase.js';
+import { AuthContext } from '../context/AuthProvider';
+import { PokemonContext } from '../context/PokemonProvider';
+
 const HomePage = () => {
     const {
         allPokemons,
@@ -13,28 +13,17 @@ const HomePage = () => {
         fetchAllPokemons,
         offset,
         setIsLoading,
-        user,
-        setUser,
     } = useContext(PokemonContext);
-
+    const { login, authErrorMessages, profile, user } = useContext(AuthContext);
     useEffect(() => {
         setIsLoading(true);
         fetchAllPokemons();
     }, [offset]);
 
     useEffect(() => {}, [filteredPokemons]);
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (firebaseUser) => {
-            if (firebaseUser) {
-                // User is signed in
-                const uid = firebaseUser.uid;
-            } else {
-                // User is signed out
-            }
-        });
-    }, [setUser]);
-
+    {
+        console.log(profile);
+    }
     return (
         <div>
             {selectedOption.value !== 'all' ? (

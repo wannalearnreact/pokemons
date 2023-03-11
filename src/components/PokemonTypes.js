@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useContext } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+import { PokemonContext } from '../context/PokemonProvider';
+
 import '../styles/components/PokemonTypes.css';
 const PokemonTypes = ({ pokemon, justify }) => {
     const { checkType, uuid } = useContext(PokemonContext);

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../styles/components/Navbar.css';
@@ -8,6 +8,8 @@ import search from '../assets/images/search.png';
 import Dropdown from './Dropdown';
 import Filter from '../components/Filter';
 import favourites from '../assets/images/favourites.png';
+import { PokemonContext } from '../context/PokemonProvider';
+
 const Navbar = () => {
     const {
         searchedValue,

@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { PokemonContext } from '../context/PokemonContext';
+
 import Pokemon from './Pokemon';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemons.css';
 import Loading from './Loading';
+import { PokemonContext } from '../context/PokemonProvider';
 
 const Pokemons = ({ pokemons }) => {
     const { isLoading, uuid, sortActive, motion, favouriteIDs } =

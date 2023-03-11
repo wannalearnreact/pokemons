@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+
 import { useNavigate } from 'react-router-dom';
-import { PokemonContext } from '../context/PokemonContext';
+import { AuthContext } from '../context/AuthProvider';
+import { PokemonContext } from '../context/PokemonProvider';
 
 const Navbar2 = () => {
+    const { login, authErrorMessages, profile, user, logout } =
+        useContext(AuthContext);
     const navigate = useNavigate();
+    /*
     const { user, setUser } = useContext(PokemonContext);
     const handleLogout = () => {
         signOut(auth)
@@ -19,12 +22,13 @@ const Navbar2 = () => {
                 // An error happened.
             });
     };
-
+ */
     return (
         <nav className='navbar'>
+            <p>test</p>
             <p>Home</p>
             {user ? (
-                <button className='btn' onClick={handleLogout}>
+                <button className='btn' onClick={logout}>
                     Logout
                 </button>
             ) : (

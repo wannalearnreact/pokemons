@@ -9,8 +9,9 @@ import Error from './components/Error';
 import SinglePokemonPage from './pages/SinglePokemonPage';
 import Navbar2 from './components/Navbar2';
 import { useState } from 'react';
-import Signup from './pages/Signup';
+
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,8 +32,9 @@ function App() {
                         path='/pokemon/:id'
                         element={<SinglePokemonPage />}
                     />
-                    <Route path='/signup' element={<Signup />} />
+
                     <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
                     <Route path='*' element={<Error />} />
                 </Routes>
             </BrowserRouter>
