@@ -9,6 +9,7 @@ import Dropdown from './Dropdown';
 import Filter from '../components/Filter';
 import favourites from '../assets/images/favourites.png';
 import { PokemonContext } from '../context/PokemonProvider';
+import { AuthContext } from '../context/AuthProvider';
 
 const Navbar = () => {
     const {
@@ -19,6 +20,8 @@ const Navbar = () => {
         sortActive,
         setSortActive,
     } = useContext(PokemonContext);
+    const { login, authErrorMessages, profile, user, logout } =
+        useContext(AuthContext);
 
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
@@ -37,6 +40,11 @@ const Navbar = () => {
         e.preventDefault();
         navigate('/search');
     };
+
+    const navigateToLogin = () => {
+        navigate('/login');
+    };
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
@@ -46,21 +54,10 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {}, [searchedValue, filteredPokemons]);
-
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div style={{ display: 'flex' }}>
                 <Link to='/' className='navbar-brand' />
-                {/*  <Link
-                    to='/favourites'
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                    }}
-                >
-                    <img style={{ width: '64px' }} src={favourites} alt='' />
-                </Link> */}
                 {filterActive && (
                     <div className='sort-container'>
                         <Dropdown />
@@ -72,18 +69,25 @@ const Navbar = () => {
                 )}
             </div>
             <div className='navbar-sort'>
-                <Link
-                    to='/favourites'
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                    }}
-                >
-                    <img style={{ width: '50px' }} src={favourites} alt='' />
-                </Link>
-                <form className='form'>
-                    <img className='form-img ' src={search} alt='' />
+                {user && (
+                    <Link
+                        to='/favourites'
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        <img
+                            style={{ width: '50px' }}
+                            src={favourites}
+                            alt=''
+                        />
+                    </Link>
+                )}
+
+                <form className='navbar-search'>
+                    <img className='navbar-img ' src={search} alt='' />
                     <input
                         type='text'
                         placeholder='Find pokemon...'
@@ -91,11 +95,31 @@ const Navbar = () => {
                         value={searchedValue}
                         onChange={(e) => {
                             setSearchedValue(e.target.value);
+                            handleSearch(e.target.value);
                         }}
                     />
 
-                    <Button text='Search' btnFunction={handleSearch} />
+                    <div>
+                        <Button
+                            text='Search'
+                            btnFunction={handleSearch}
+                            btnClass=''
+                        />
+                    </div>
                     <Filter />
+                    {user ? (
+                        <Button
+                            text='Logout'
+                            btnFunction={logout}
+                            btnClass='navbar'
+                        />
+                    ) : (
+                        <Button
+                            text='Login'
+                            btnFunction={navigateToLogin}
+                            btnClass='navbar'
+                        />
+                    )}
                 </form>
             </div>
         </nav>

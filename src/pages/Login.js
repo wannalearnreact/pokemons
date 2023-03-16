@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import Register from './Register';
-
+import '../styles/pages/Login.css';
+import Button from '../components/Button';
 const Login = () => {
     const { login, authErrorMessages, profile, user } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -43,48 +44,38 @@ const Login = () => {
     }
 
     return (
-        <div style={{ backgroundColor: 'white' }}>
-            <h2>Sign In To Existing Account</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <label>email:</label>
-                        </td>
-                        <td>
-                            <input
-                                type='text'
-                                name='email'
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>password:</label>
-                        </td>
-                        <td>
-                            <input
-                                type='password'
-                                name='password'
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </td>
-                    </tr>
-                    <tr>
+        <div className='form-container'>
+            <div className='form'>
+                <div className='form-title'>Sign In To Existing Account</div>
+                <div>
+                    <div className='form-field'>
+                        <label>e-mail</label>
+                        <input
+                            type='text'
+                            name='email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='form-field'>
+                        <label>password</label>
+                        <input
+                            type='password'
+                            name='password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div>
                         {!loginRunning ? (
-                            <td colSpan={2} style={{ textAlign: 'center' }}>
-                                <button
-                                    style={{ width: '75%' }}
-                                    onClick={handleButtonClick}
-                                >
-                                    Login
-                                </button>
+                            <div>
+                                <Button
+                                    text='Login'
+                                    btnFunction={handleButtonClick}
+                                    btnClass='form'
+                                />
                                 {(errorMessage || authErrorMessages) && (
                                     <>
-                                        <br />
                                         <h3 style={{ color: 'red' }}>
                                             {errorMessage}
                                         </h3>
@@ -100,22 +91,25 @@ const Login = () => {
                                         )}
                                     </>
                                 )}
-                            </td>
+                                <div className='register-container'>
+                                    <div>
+                                        Don't have an account?{' '}
+                                        <p onClick={toggleShowRegisterScreen}>
+                                            Sign up
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         ) : (
-                            <td>
+                            <div>
                                 <h6 style={{ color: 'green' }}>
                                     <em>logging in...</em>
                                 </h6>
-                            </td>
+                            </div>
                         )}
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-            <br />
-            <button onClick={toggleShowRegisterScreen}>
-                Register New Account
-            </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

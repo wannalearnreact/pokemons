@@ -1,9 +1,12 @@
 import '../styles/components/Button.css';
 
-const Button = ({ text, btnFunction }) => {
+const Button = ({ text, btnFunction, btnClass }) => {
     return (
         <div className='btn-container'>
-            <button onClick={btnFunction} className='btn'>
+            <button
+                onClick={btnFunction}
+                className={`btn-base btn-${btnClass}`}
+            >
                 {text}
             </button>
         </div>

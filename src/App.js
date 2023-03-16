@@ -7,27 +7,31 @@ import Navbar from './components/Navbar';
 import './index.css';
 import Error from './components/Error';
 import SinglePokemonPage from './pages/SinglePokemonPage';
-import Navbar2 from './components/Navbar2';
-import { useState } from 'react';
-
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { AuthContext } from './context/AuthProvider';
+import Protected from './components/Protected';
+import { useContext } from 'react';
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    const { user } = useContext(AuthContext);
     return (
         <div className='App'>
             <BrowserRouter>
                 <Navbar />
-                <Navbar2
-                    isAuthenticated={isAuthenticated}
-                    setIsAuthenticated={setIsAuthenticated}
-                />
+
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='/search' element={<SearchPage />} />
-                    <Route path='/favourites' element={<FavouritesPage />} />
+                    {/*   <Route path='/favourites' element={<FavouritesPage />} /> */}
+                    <Route
+                        path='/favourites'
+                        element={
+                            <Protected user={user}>
+                                <FavouritesPage />
+                            </Protected>
+                        }
+                    />
                     <Route
                         path='/pokemon/:id'
                         element={<SinglePokemonPage />}

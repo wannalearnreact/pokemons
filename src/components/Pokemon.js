@@ -8,11 +8,13 @@ import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 import { PokemonContext } from '../context/PokemonProvider';
+import { AuthContext } from '../context/AuthProvider';
 
 const Pokemon = ({ pokemon }) => {
-    const [isShown, setIsShown] = useState(false);
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
+    const { user } = useContext(AuthContext);
+    const [isShown, setIsShown] = useState(false);
 
     const isFavourite = favouriteIDs.includes(pokemon.id);
 
@@ -31,7 +33,7 @@ const Pokemon = ({ pokemon }) => {
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
         >
-            {isShown && (
+            {isShown && user && (
                 <img
                     onClick={() => handlePokemonClick(pokemon.id)}
                     /*  className='pokemon-favourite' */

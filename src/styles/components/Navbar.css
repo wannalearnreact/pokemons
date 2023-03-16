@@ -38,11 +38,11 @@
     height: 50px;
     margin-left: 0.5rem;
 }
-.form {
+.navbar-search {
     display: flex;
     align-items: center;
 }
-.form input {
+.navbar input {
     padding: 1rem 0.1rem 1rem 4rem;
     font-size: 1rem;
     font-weight: bold;
@@ -55,8 +55,11 @@
     color: #333;
     font-family: 'Sansita', sans-serif;
 }
+.navbar input::placeholder {
+    color: #333;
+}
 
-.form-img {
+.navbar-img {
     padding: 1rem;
     width: 64px;
     height: 64px;

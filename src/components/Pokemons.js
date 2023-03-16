@@ -35,7 +35,10 @@ const Pokemons = ({ pokemons }) => {
         }
     }
     {
-        console.log('favouritePokemons', favouriteIDs);
+        console.log('IDs', favouriteIDs);
+    }
+    {
+        console.log(pokemons);
     }
     return (
         <div className='pokemon-container'>

@@ -6,9 +6,12 @@ import Info from '../components/Info';
 import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
 import { PokemonContext } from '../context/PokemonProvider';
+import { AuthContext } from '../context/AuthProvider';
 const FavouritesPage = () => {
-    const { favouriteIDs, globalPokemons, setFavouriteIDs, user } =
+    const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
+    const { login, authErrorMessages, profile, user, logout } =
+        useContext(AuthContext);
     const [favouritePokemons, setFavouritePokemons] = useState([]);
 
     useEffect(() => {
@@ -17,11 +20,14 @@ const FavouritesPage = () => {
                 favouriteIDs.includes(pokemon.id)
             )
         );
-    }, [favouriteIDs]);
+    }, [favouriteIDs, user]);
 
     const emptyFavourites = () => {
         setFavouriteIDs([]);
     };
+    {
+        console.log('favouritePokemons', favouritePokemons);
+    }
     return (
         <div>
             {favouritePokemons.length > 0 ? (

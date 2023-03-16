@@ -8,6 +8,7 @@ const SearchPage = () => {
     const { globalPokemons, searchedValue, uuid } = useContext(PokemonContext);
 
     useEffect(() => {}, [searchedValue]);
+
     return (
         <div className='pokemon-container'>
             {searchedValue &&
