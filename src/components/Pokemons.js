@@ -7,7 +7,7 @@ import Loading from './Loading';
 import { PokemonContext } from '../context/PokemonProvider';
 
 const Pokemons = ({ pokemons }) => {
-    const { isLoading, uuid, sortActive, motion, favouriteIDs } =
+    const { isLoading, uuid, sortActive, favouriteIDs } =
         useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {

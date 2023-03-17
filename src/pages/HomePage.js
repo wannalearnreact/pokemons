@@ -38,14 +38,6 @@ const HomePage = () => {
                     btnFunction={loadMorePokemons}
                 />
             )}
-
-            {/*  <div style={{ backgroundColor: 'white', height: '100px' }}>
-                {user ? (
-                    <div>You are logged in as {user}</div>
-                ) : (
-                    <div>You are not logged in</div>
-                )}
-            </div> */}
         </div>
     );
 };
