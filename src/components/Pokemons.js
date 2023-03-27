@@ -37,9 +37,7 @@ const Pokemons = ({ pokemons }) => {
     {
         console.log('IDs', favouriteIDs);
     }
-    {
-        console.log(pokemons);
-    }
+
     return (
         <div className='pokemon-container'>
             {isLoading

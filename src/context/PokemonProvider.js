@@ -21,9 +21,8 @@ import water from '../assets/icons/water.svg';
 import uuid from 'react-uuid';
 import { motion } from 'framer-motion';
 
-//firebase
-
 import { createContext } from 'react';
+
 export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
@@ -182,10 +181,10 @@ export const PokemonProvider = ({ children }) => {
     const handleChange = (selectedOption) => {
         setSelectedOption(selectedOption);
         if (selectedOption.value === 'all') {
-            setFilteredPokemons(allPokemons);
+            setFilteredPokemons(globalPokemons);
         } else {
             setFilteredPokemons(
-                allPokemons.filter((pokemon) => {
+                globalPokemons.filter((pokemon) => {
                     return (
                         pokemon.types.filter(
                             (t) => t.type.name === selectedOption.value

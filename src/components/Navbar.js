@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../styles/components/Navbar.css';
 import Button from './Button';
@@ -20,6 +20,7 @@ const Navbar = () => {
         sortActive,
         setSortActive,
     } = useContext(PokemonContext);
+
     const { login, authErrorMessages, profile, user, logout } =
         useContext(AuthContext);
 
@@ -36,9 +37,14 @@ const Navbar = () => {
         }
     };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        navigate('/search');
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            navigate('/search');
+        }
+    };
+
+    const handleChange = (e) => {
+        setSearchedValue(e.target.value);
     };
 
     const navigateToLogin = () => {
@@ -86,41 +92,32 @@ const Navbar = () => {
                     </Link>
                 )}
 
-                <form className='navbar-search'>
+                <div>
                     <img className='navbar-img ' src={search} alt='' />
-                    <input
-                        type='text'
-                        placeholder='Find pokemon...'
-                        aria-label='Search'
-                        value={searchedValue}
-                        onChange={(e) => {
-                            setSearchedValue(e.target.value);
-                            handleSearch(e.target.value);
-                        }}
-                    />
+                </div>
+                <input
+                    type='text'
+                    placeholder='Find pokemon...'
+                    aria-label='Search'
+                    value={searchedValue}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                />
 
-                    <div>
-                        <Button
-                            text='Search'
-                            btnFunction={handleSearch}
-                            btnClass=''
-                        />
-                    </div>
-                    <Filter />
-                    {user ? (
-                        <Button
-                            text='Logout'
-                            btnFunction={logout}
-                            btnClass='navbar'
-                        />
-                    ) : (
-                        <Button
-                            text='Login'
-                            btnFunction={navigateToLogin}
-                            btnClass='navbar'
-                        />
-                    )}
-                </form>
+                <Filter />
+                {user ? (
+                    <Button
+                        text='Logout'
+                        btnFunction={logout}
+                        btnClass='navbar'
+                    />
+                ) : (
+                    <Button
+                        text='Login'
+                        btnFunction={navigateToLogin}
+                        btnClass='navbar'
+                    />
+                )}
             </div>
         </nav>
     );
