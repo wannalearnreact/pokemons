@@ -19,8 +19,9 @@ const Navbar = () => {
         filterActive,
         sortActive,
         setSortActive,
+        favouriteIDs,
     } = useContext(PokemonContext);
-
+    const location = useLocation();
     const { login, authErrorMessages, profile, user, logout } =
         useContext(AuthContext);
 
@@ -37,12 +38,17 @@ const Navbar = () => {
         }
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
             navigate('/search');
         }
     };
 
+    const handleSearch = (e) => {
+        if (!location.pathname.includes('search')) {
+            navigate('/search');
+        }
+    };
     const handleChange = (e) => {
         setSearchedValue(e.target.value);
     };
@@ -76,23 +82,17 @@ const Navbar = () => {
             </div>
             <div className='navbar-sort'>
                 {user && (
-                    <Link
-                        to='/favourites'
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        <img
-                            style={{ width: '50px' }}
-                            src={favourites}
-                            alt=''
-                        />
+                    <Link to='/favourites' className='navbar-favourites'>
+                        <img src={favourites} alt='favourites' />
+                        {favouriteIDs.length > 0 && (
+                            <p className='navbar-favourites-count'>
+                                {favouriteIDs.length}
+                            </p>
+                        )}
                     </Link>
                 )}
 
-                <div>
+                <div className='navbar-search'>
                     <img className='navbar-img ' src={search} alt='' />
                 </div>
                 <input

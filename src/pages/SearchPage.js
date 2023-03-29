@@ -9,11 +9,38 @@ const SearchPage = () => {
         uuid,
         selectedOption,
         filteredPokemons,
+        sortActive,
+        setSorcActive,
     } = useContext(PokemonContext);
+
+    function sortAndRemoveDuplicates(array) {
+        if (sortActive === false) {
+            return array
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .reduce((acc, cur) => {
+                    return acc.some((p) => p.id === cur.id)
+                        ? acc
+                        : [...acc, cur];
+                }, []);
+        }
+        if (sortActive === true) {
+            return array
+                .sort((b, a) => a.name.localeCompare(b.name))
+                .reduce((acc, cur) => {
+                    return acc.some((p) => p.id === cur.id)
+                        ? acc
+                        : [...acc, cur];
+                }, []);
+        } else {
+            return array.reduce((acc, cur) => {
+                return acc.some((p) => p.id === cur.id) ? acc : [...acc, cur];
+            }, []);
+        }
+    }
 
     return (
         <div className='pokemon-container'>
-            {globalPokemons
+            {sortAndRemoveDuplicates(globalPokemons)
                 .filter(
                     (pokemon) =>
                         selectedOption.value === 'all' ||

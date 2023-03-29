@@ -20,7 +20,7 @@ const FavouritesPage = () => {
                 favouriteIDs.includes(pokemon.id)
             )
         );
-    }, [favouriteIDs]);
+    }, [favouriteIDs, user]);
 
     const emptyFavourites = () => {
         setFavouriteIDs([]);

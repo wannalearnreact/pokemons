@@ -25,6 +25,7 @@
 }
 .navbar-sort {
     display: flex;
+    align-items: center;
 }
 .sort-container {
     display: flex;
@@ -40,7 +41,6 @@
 .navbar-search {
     display: flex;
     align-items: center;
-    position: relative;
 }
 .navbar input {
     padding: 1rem 0.1rem 1rem 4rem;
@@ -63,7 +63,33 @@
     padding: 1rem;
     width: 64px;
     height: 64px;
+    position: absolute;
     cursor: pointer;
     text-align: center;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+}
+.navbar-favourites {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.navbar-favourites img {
+    width: 50px;
+}
+.navbar-favourites-count {
     position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f44336;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0;
 }
