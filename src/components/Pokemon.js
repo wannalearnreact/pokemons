@@ -9,22 +9,44 @@ import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 import { PokemonContext } from '../context/PokemonProvider';
 import { AuthContext } from '../context/AuthProvider';
+import { FirebaseContext } from '../context/FirebaseProvider';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 
 const Pokemon = ({ pokemon }) => {
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
     const { user } = useContext(AuthContext);
     const [isShown, setIsShown] = useState(false);
+    const { myAuth, myFS } = useContext(FirebaseContext);
 
     const isFavourite = favouriteIDs.includes(pokemon.id);
 
-    const handlePokemonClick = (id) => {
+    const handlePokemonClick = async (id) => {
         if (isFavourite) {
             setFavouriteIDs(favouriteIDs.filter((favId) => favId !== id));
+            await updateFirebaseFavouriteIDs(
+                favouriteIDs.filter((favId) => favId !== id)
+            );
         } else {
             setFavouriteIDs([...favouriteIDs, id]);
+            await updateFirebaseFavouriteIDs([...favouriteIDs, id]);
         }
     };
+
+    const updateFirebaseFavouriteIDs = async (ids) => {
+        if (user) {
+            const ref = doc(myFS, 'users', user.uid);
+            await updateDoc(ref, {
+                IDs: ids,
+            });
+        }
+    };
+
+    useEffect(() => {
+        if (isFavourite) {
+            updateFirebaseFavouriteIDs([...favouriteIDs, pokemon.id]);
+        }
+    }, [favouriteIDs]);
 
     return (
         <motion.div
@@ -36,7 +58,6 @@ const Pokemon = ({ pokemon }) => {
             {isShown && user && (
                 <img
                     onClick={() => handlePokemonClick(pokemon.id)}
-                    /*  className='pokemon-favourite' */
                     className={`${isShown ? 'pokemon-favourite' : ''}`}
                     style={{ width: '64px', height: '64px' }}
                     src={isFavourite ? removeFavourite : addFavourite}

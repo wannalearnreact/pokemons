@@ -7,11 +7,14 @@ import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
 import { PokemonContext } from '../context/PokemonProvider';
 import { AuthContext } from '../context/AuthProvider';
+import { doc, updateDoc } from 'firebase/firestore';
+import { FirebaseContext } from '../context/FirebaseProvider';
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
     const { login, authErrorMessages, profile, user, logout } =
         useContext(AuthContext);
+    const { myAuth, myFS } = useContext(FirebaseContext);
     const [favouritePokemons, setFavouritePokemons] = useState([]);
 
     useEffect(() => {
@@ -22,9 +25,16 @@ const FavouritesPage = () => {
         );
     }, [favouriteIDs, user]);
 
-    const emptyFavourites = () => {
+    const emptyFavourites = async () => {
         setFavouriteIDs([]);
+        if (user) {
+            const ref = doc(myFS, 'users', user.uid);
+            await updateDoc(ref, {
+                IDs: [],
+            });
+        }
     };
+
     {
         console.log('favouritePokemons', favouritePokemons);
     }
