@@ -47,9 +47,10 @@ select {
     border-radius: 0.02rem;
     color: #363636;
 }
-.register-container {
+.signup-container {
     margin-top: 1rem;
 }
-.register-container p {
+.signup-container p {
     color: rgb(30, 30, 202);
+    cursor: pointer;
 }

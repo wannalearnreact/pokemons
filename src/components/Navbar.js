@@ -9,7 +9,8 @@ import Dropdown from './Dropdown';
 import Filter from '../components/Filter';
 import favourites from '../assets/images/favourites.png';
 import { PokemonContext } from '../context/PokemonProvider';
-import { AuthContext } from '../context/AuthProvider';
+import { useLogout } from '../hooks/useLogout';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
     const {
@@ -21,10 +22,10 @@ const Navbar = () => {
         setSortActive,
         favouriteIDs,
     } = useContext(PokemonContext);
-    const location = useLocation();
-    const { login, authErrorMessages, profile, user, logout } =
-        useContext(AuthContext);
+    const { logout } = useLogout();
+    const { user } = useContext(AuthContext);
 
+    const location = useLocation();
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
 
@@ -105,6 +106,7 @@ const Navbar = () => {
                 />
 
                 <Filter />
+
                 {user ? (
                     <Button
                         text='Logout'

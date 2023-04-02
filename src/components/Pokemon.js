@@ -8,46 +8,46 @@ import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 import { PokemonContext } from '../context/PokemonProvider';
-import { AuthContext } from '../context/AuthProvider';
-import { FirebaseContext } from '../context/FirebaseProvider';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+/* import { AuthContext } from '../context/AuthProvider'; */
+/* import { FirebaseContext } from '../context/FirebaseProvider';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'; */
 
 const Pokemon = ({ pokemon }) => {
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
-    const { user } = useContext(AuthContext);
+    /*   const { user } = useContext(AuthContext); */
     const [isShown, setIsShown] = useState(false);
-    const { myAuth, myFS } = useContext(FirebaseContext);
+    /* const { myAuth, myFS } = useContext(FirebaseContext); */
 
     const isFavourite = favouriteIDs.includes(pokemon.id);
 
-    const handlePokemonClick = async (id) => {
+    const handlePokemonClick = /* async */ (id) => {
         if (isFavourite) {
             setFavouriteIDs(favouriteIDs.filter((favId) => favId !== id));
-            await updateFirebaseFavouriteIDs(
+            /*  await updateFirebaseFavouriteIDs(
                 favouriteIDs.filter((favId) => favId !== id)
-            );
+            ); */
         } else {
             setFavouriteIDs([...favouriteIDs, id]);
-            await updateFirebaseFavouriteIDs([...favouriteIDs, id]);
+            /*  await updateFirebaseFavouriteIDs([...favouriteIDs, id]); */
         }
     };
 
-    const updateFirebaseFavouriteIDs = async (ids) => {
+    /*    const updateFirebaseFavouriteIDs = async (ids) => {
         if (user) {
             const ref = doc(myFS, 'users', user.uid);
             await updateDoc(ref, {
                 IDs: ids,
             });
         }
-    };
+    }; */
 
-    useEffect(() => {
+    /*     useEffect(() => {
         if (isFavourite) {
             updateFirebaseFavouriteIDs([...favouriteIDs, pokemon.id]);
         }
     }, [favouriteIDs]);
-
+ */
     return (
         <motion.div
             onMouseEnter={() => setIsShown(true)}
@@ -55,7 +55,7 @@ const Pokemon = ({ pokemon }) => {
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
         >
-            {isShown && user && (
+            {isShown /*  && user */ && (
                 <img
                     onClick={() => handlePokemonClick(pokemon.id)}
                     className={`${isShown ? 'pokemon-favourite' : ''}`}

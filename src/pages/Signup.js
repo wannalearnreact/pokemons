@@ -1,82 +1,71 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+import { AuthContext } from '../context/AuthContext';
+import { useSignup } from '../hooks/useSignup';
 
-const Signup = () => {
-    const navigate = useNavigate();
+export default function Signup() {
+    const { showForm, toggleForm } = useContext(AuthContext);
+    const { error, signup } = useSignup();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const onSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                navigate('/login');
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
+        signup(email, password);
     };
 
     return (
-        <main>
-            <section style={{ backgroundColor: 'white' }}>
+        <div className='form-container'>
+            <div className='form'>
+                <div className='form-title'>Create a New Account</div>
+                <div className='form-field'>
+                    <label>e-mail</label>
+                    <input
+                        required
+                        type='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+
+                <div className='form-field'>
+                    <label>password</label>
+                    <input
+                        required
+                        type='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+
                 <div>
-                    <div>
-                        <h1> FocusApp </h1>
-                        <form>
-                            <div>
-                                <label htmlFor='email-address'>
-                                    Email address
-                                </label>
-                                <input
-                                    type='email'
-                                    label='Email address'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    placeholder='Email address'
-                                />
-                            </div>
+                    <Button
+                        text='Sign Up'
+                        btnFunction={handleSubmit}
+                        btnClass='form'
+                    />
 
-                            <div>
-                                <label htmlFor='password'>Password</label>
-                                <input
-                                    type='password'
-                                    label='Create password'
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    required
-                                    placeholder='Password'
-                                />
-                            </div>
-
-                            <button type='submit' onClick={onSubmit}>
-                                Sign up
-                            </button>
-                        </form>
-
-                        <p>
-                            Already have an account?{' '}
-                            <NavLink to='/login'>Sign in</NavLink>
-                        </p>
+                    <div className='signup-container'>
+                        <div>
+                            Already have an account?
+                            <p
+                                onClick={() => {
+                                    navigate('/login');
+                                    toggleForm();
+                                }}
+                            >
+                                Log In
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
-    );
-};
+                {error && <p>{error}</p>}
+            </div>
 
-export default Signup;
+            {error && <p>{error}</p>}
+        </div>
+    );
+}
