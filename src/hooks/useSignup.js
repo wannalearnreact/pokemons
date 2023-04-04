@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 //firebase
-import { auth } from '../firebase/config';
+import { auth, db } from '../firebase/config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 export const useSignup = () => {
     const [error, setError] = useState(null);
     const { dispatch } = useAuthContext();
@@ -11,19 +11,37 @@ export const useSignup = () => {
     const signup = (email, password) => {
         setError(null);
         createUserWithEmailAndPassword(auth, email, password)
-            .then((res) => {
-                dispatch({ type: 'LOGIN', payload: res.user });
+            .then((userCredential) => {
+                const user = userCredential.user;
+                const userDocRef = doc(db, 'users', user.uid);
+
+                setDoc(userDocRef, {
+                    email: user.email,
+                    uid: user.uid,
+                    dateCreated: serverTimestamp(),
+                })
+                    .then(() => {
+                        dispatch({ type: 'LOGIN', payload: user });
+                    })
+                    .catch((error) => {
+                        setError(error.message);
+                        console.log(error);
+                    });
             })
-            .catch((err) => {
+            .catch((error) => {
                 if (
-                    err.code === 'auth/wrong-password' ||
-                    err.code === 'auth/invalid-email'
+                    error.code === 'auth/wrong-password' ||
+                    error.code === 'auth/invalid-email'
                 ) {
                     setError('Invalid data, please try again!');
+                } else if (error.code === 'auth/email-already-in-use') {
+                    setError('E-mail already in use!');
+                } else if (error.code === 'auth/weak-password') {
+                    setError('Password too short!');
                 } else {
                     setError('An error occurred. Please try again later.');
+                    console.log(error);
                 }
-                console.log('err', err.code);
             });
     };
 

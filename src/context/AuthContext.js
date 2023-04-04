@@ -36,10 +36,10 @@ export const AuthContextProvider = ({ children }) => {
         dispatch({ type: 'TOGGLE_FORM' });
     };
 
-    console.log('AuthContext state:', state);
+    console.log('user:', state.user && state.user.uid);
 
     return (
-        <AuthContext.Provider value={{ ...state, dispatch, toggleForm }}>
+        <AuthContext.Provider value={{ ...state, dispatch }}>
             {children}
         </AuthContext.Provider>
     );

@@ -6,7 +6,7 @@ import '../styles/pages/Login.css';
 import '../styles/utils.css';
 import { AuthContext } from '../context/AuthContext';
 export default function Login() {
-    const { showForm, toggleForm } = useContext(AuthContext);
+    const { dispatch } = useContext(AuthContext);
     const { error, login } = useLogin();
 
     const [email, setEmail] = useState('');
@@ -63,7 +63,7 @@ export default function Login() {
                             <p
                                 onClick={() => {
                                     navigate('/signup');
-                                    toggleForm();
+                                    dispatch({ type: 'TOGGLE_FORM' });
                                 }}
                             >
                                 Sign up
