@@ -1,4 +1,4 @@
-.remove {
+.pokemon-hidden {
     display: none;
 }
 .pokemon {
@@ -107,11 +107,3 @@
 .color-unknow {
     color: #757575;
 }
-
-/* .color-primary {
-   color: #006d77;
-}
-.color-primary-hover {
-   color: #83c5be;
-}
- */

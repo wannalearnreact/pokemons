@@ -3,6 +3,7 @@ import { useLogin } from '../hooks/useLogin';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/Login.css';
+import '../styles/utils.css';
 import { AuthContext } from '../context/AuthContext';
 export default function Login() {
     const { showForm, toggleForm } = useContext(AuthContext);
@@ -12,12 +13,11 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    /*    const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         login(email, password);
-        navigate('/');
-    }; */
-    const handleSubmit = (e) => {
+    };
+    /*  const handleSubmit = (e) => {
         e.preventDefault();
         const response = login(email, password);
         if (response.success) {
@@ -25,7 +25,7 @@ export default function Login() {
         } else {
             // handle incorrect email/password error
         }
-    };
+    }; */
 
     return (
         <div className='form-container'>
@@ -56,7 +56,7 @@ export default function Login() {
                         btnFunction={handleSubmit}
                         btnClass='form'
                     />
-
+                    {error && <p className='error'>{error}</p>}
                     <div className='signup-container'>
                         <div>
                             Don't have an account?{' '}
@@ -71,7 +71,6 @@ export default function Login() {
                         </div>
                     </div>
                 </div>
-                {error && <p>{error}</p>}
             </div>
         </div>
     );

@@ -16,10 +16,19 @@ export const useLogin = () => {
                 console.log('logged in');
             })
             .catch((err) => {
-                setError(err.message);
-                console.log(err.message);
+                if (
+                    err.code === 'auth/wrong-password' ||
+                    err.code === 'auth/invalid-email'
+                ) {
+                    setError('Invalid data, please try again!');
+                } else if (err.code === 'auth/user-not-found') {
+                    setError("User doesn't exist!");
+                } else {
+                    setError('An error occurred. Please try again later.');
+                }
+                console.log('err', err.code);
             });
     };
 
-    return { error, login, setError };
+    return { error, login };
 };

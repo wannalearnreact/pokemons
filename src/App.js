@@ -34,12 +34,26 @@ function App() {
                             }
                         />
                         <Route
+                            path='/login'
+                            element={
+                                <Protected user={!user}>
+                                    <Login />
+                                </Protected>
+                            }
+                        />
+                        <Route
+                            path='/signup'
+                            element={
+                                <Protected user={!user}>
+                                    <Signup />
+                                </Protected>
+                            }
+                        />
+                        <Route
                             path='/pokemon/:id'
                             element={<SinglePokemonPage />}
                         />
 
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/signup' element={<Signup />} />
                         <Route path='*' element={<Error />} />
                     </Routes>
                 </BrowserRouter>

@@ -15,7 +15,15 @@ export const useSignup = () => {
                 dispatch({ type: 'LOGIN', payload: res.user });
             })
             .catch((err) => {
-                setError(err.message);
+                if (
+                    err.code === 'auth/wrong-password' ||
+                    err.code === 'auth/invalid-email'
+                ) {
+                    setError('Invalid data, please try again!');
+                } else {
+                    setError('An error occurred. Please try again later.');
+                }
+                console.log('err', err.code);
             });
     };
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { AuthContext } from '../context/AuthContext';
 import { useSignup } from '../hooks/useSignup';
-
+import '../styles/utils.css';
 export default function Signup() {
     const { showForm, toggleForm } = useContext(AuthContext);
     const { error, signup } = useSignup();
@@ -47,6 +47,7 @@ export default function Signup() {
                         btnFunction={handleSubmit}
                         btnClass='form'
                     />
+                    {error && <p className='error'>{error}</p>}
 
                     <div className='signup-container'>
                         <div>
@@ -62,10 +63,7 @@ export default function Signup() {
                         </div>
                     </div>
                 </div>
-                {error && <p>{error}</p>}
             </div>
-
-            {error && <p>{error}</p>}
         </div>
     );
 }

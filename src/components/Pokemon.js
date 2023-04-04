@@ -53,15 +53,17 @@ const Pokemon = ({ pokemon }) => {
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
             whileHover={{ scale: 1.05 }}
-            className={pokemon.id >= 650 ? 'remove' : ' pokemon'}
+            className={pokemon.id >= 650 ? 'pokemon-hidden ' : ' pokemon'}
         >
             {isShown /*  && user */ && (
-                <img
-                    onClick={() => handlePokemonClick(pokemon.id)}
-                    className={`${isShown ? 'pokemon-favourite' : ''}`}
-                    style={{ width: '64px', height: '64px' }}
-                    src={isFavourite ? removeFavourite : addFavourite}
-                />
+                <div style={{ position: 'relative' }}>
+                    <img
+                        onClick={() => handlePokemonClick(pokemon.id)}
+                        className={`${isShown ? 'pokemon-favourite' : ''}`}
+                        style={{ width: '64px', height: '64px' }}
+                        src={isFavourite ? removeFavourite : addFavourite}
+                    />
+                </div>
             )}
 
             <Link to={`/pokemon/${pokemon.id}`}>
