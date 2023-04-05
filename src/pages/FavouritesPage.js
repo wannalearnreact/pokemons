@@ -5,11 +5,12 @@ import Info from '../components/Info';
 import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
 import { PokemonContext } from '../context/PokemonProvider';
+import { AuthContext } from '../context/AuthContext';
 
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
-
+    const { user, dispatch } = useContext(AuthContext);
     const [favouritePokemons, setFavouritePokemons] = useState([]);
 
     useEffect(() => {
@@ -24,9 +25,6 @@ const FavouritesPage = () => {
         setFavouriteIDs([]);
     };
 
-    {
-        console.log('favouritePokemons', favouritePokemons);
-    }
     return (
         <div>
             {favouritePokemons.length > 0 ? (

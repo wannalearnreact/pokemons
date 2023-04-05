@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import PokemonTypes from './PokemonTypes';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemon.css';
@@ -8,46 +7,54 @@ import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 import { PokemonContext } from '../context/PokemonProvider';
-/* import { AuthContext } from '../context/AuthProvider'; */
-/* import { FirebaseContext } from '../context/FirebaseProvider';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'; */
+import { db, auth } from '../firebase/config';
+import { AuthContext } from '../context/AuthContext';
+import {
+    doc,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
+    getDoc,
+    setDoc,
+} from 'firebase/firestore';
 
 const Pokemon = ({ pokemon }) => {
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
-    /*   const { user } = useContext(AuthContext); */
+    const { user, dispatch } = useContext(AuthContext);
+
     const [isShown, setIsShown] = useState(false);
-    /* const { myAuth, myFS } = useContext(FirebaseContext); */
 
     const isFavourite = favouriteIDs.includes(pokemon.id);
 
-    const handlePokemonClick = /* async */ (id) => {
+    const handlePokemonClick = async (id) => {
         if (isFavourite) {
             setFavouriteIDs(favouriteIDs.filter((favId) => favId !== id));
-            /*  await updateFirebaseFavouriteIDs(
-                favouriteIDs.filter((favId) => favId !== id)
-            ); */
+            await removeFromFirebaseFavourites(id);
         } else {
             setFavouriteIDs([...favouriteIDs, id]);
-            /*  await updateFirebaseFavouriteIDs([...favouriteIDs, id]); */
+            await addToFirebaseFavourites(id);
         }
     };
 
-    /*    const updateFirebaseFavouriteIDs = async (ids) => {
+    const addToFirebaseFavourites = async (id) => {
         if (user) {
-            const ref = doc(myFS, 'users', user.uid);
-            await updateDoc(ref, {
-                IDs: ids,
+            const docRef = doc(db, 'users', user.uid);
+            await updateDoc(docRef, {
+                IDs: arrayUnion(id),
             });
         }
-    }; */
+    };
 
-    /*     useEffect(() => {
-        if (isFavourite) {
-            updateFirebaseFavouriteIDs([...favouriteIDs, pokemon.id]);
+    const removeFromFirebaseFavourites = async (id) => {
+        if (user) {
+            const docRef = doc(db, 'users', user.uid);
+            await updateDoc(docRef, {
+                IDs: arrayRemove(id),
+            });
         }
-    }, [favouriteIDs]);
- */
+    };
+
     return (
         <motion.div
             onMouseEnter={() => setIsShown(true)}
@@ -55,7 +62,7 @@ const Pokemon = ({ pokemon }) => {
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'pokemon-hidden ' : ' pokemon'}
         >
-            {isShown /*  && user */ && (
+            {isShown && (
                 <div style={{ position: 'relative' }}>
                     <img
                         onClick={() => handlePokemonClick(pokemon.id)}
