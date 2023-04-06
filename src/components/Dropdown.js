@@ -7,6 +7,7 @@ const Dropdown = () => {
     const { handleChange, selectedOption, options } =
         useContext(PokemonContext);
     useEffect(() => {}, [selectedOption]);
+
     return (
         <Select
             className='dropdown'

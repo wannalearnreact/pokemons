@@ -24,6 +24,7 @@ import { motion } from 'framer-motion';
 //firebase
 
 import { createContext } from 'react';
+
 export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
     const [allPokemons, setAllPokemons] = useState([]);
@@ -35,6 +36,7 @@ export const PokemonProvider = ({ children }) => {
     const [filterActive, setFilterActive] = useState(false);
     const [sortActive, setSortActive] = useState(null);
     const [favouriteIDs, setFavouriteIDs] = useState([]);
+
     const [user, setUser] = useState(false);
 
     const url = 'https://pokeapi.co/api/v2/';
@@ -195,6 +197,43 @@ export const PokemonProvider = ({ children }) => {
             );
         }
     };
+
+    /*     const handleChange = (selectedOption) => {
+        setSelectedOption(selectedOption);
+        if (selectedOption.value === 'all') {
+            setFilteredPokemons(globalPokemons);
+        } else if (location.pathname === '/search') {
+            setFilteredPokemons(
+                globalPokemons.filter((pokemon) => {
+                    return (
+                        pokemon.types.filter(
+                            (t) => t.type.name === selectedOption.value
+                        ).length > 0
+                    );
+                })
+            );
+        } else if (location.pathname === '/homepage') {
+            setFilteredPokemons(
+                allPokemons.filter((pokemon) => {
+                    return (
+                        pokemon.types.filter(
+                            (t) => t.type.name === selectedOption.value
+                        ).length > 0
+                    );
+                })
+            );
+        } else {
+            setFilteredPokemons(
+                globalPokemons.filter((pokemon) => {
+                    return (
+                        pokemon.types.filter(
+                            (t) => t.type.name === selectedOption.value
+                        ).length > 0
+                    );
+                })
+            );
+        }
+    }; */
 
     {
         console.log('user', user, 'has logged in');
