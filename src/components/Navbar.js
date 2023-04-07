@@ -50,7 +50,7 @@ const Navbar = () => {
             navigate('/search');
         }
     };
-    const handleChange = (e) => {
+    const handleValueChange = (e) => {
         setSearchedValue(e.target.value);
     };
 
@@ -101,7 +101,7 @@ const Navbar = () => {
                     placeholder='Find pokemon...'
                     aria-label='Search'
                     value={searchedValue}
-                    onChange={handleChange}
+                    onChange={handleValueChange}
                     onKeyDown={handleKeyDown}
                 />
 

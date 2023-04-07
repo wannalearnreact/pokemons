@@ -181,60 +181,6 @@ export const PokemonProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState(options[0]);
     const [filteredPokemons, setFilteredPokemons] = useState([]);
 
-    const handleChange = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        if (selectedOption.value === 'all') {
-            setFilteredPokemons(globalPokemons);
-        } else {
-            setFilteredPokemons(
-                globalPokemons.filter((pokemon) => {
-                    return (
-                        pokemon.types.filter(
-                            (t) => t.type.name === selectedOption.value
-                        ).length > 0
-                    );
-                })
-            );
-        }
-    };
-
-    /*     const handleChange = (selectedOption) => {
-        setSelectedOption(selectedOption);
-        if (selectedOption.value === 'all') {
-            setFilteredPokemons(globalPokemons);
-        } else if (location.pathname === '/search') {
-            setFilteredPokemons(
-                globalPokemons.filter((pokemon) => {
-                    return (
-                        pokemon.types.filter(
-                            (t) => t.type.name === selectedOption.value
-                        ).length > 0
-                    );
-                })
-            );
-        } else if (location.pathname === '/homepage') {
-            setFilteredPokemons(
-                allPokemons.filter((pokemon) => {
-                    return (
-                        pokemon.types.filter(
-                            (t) => t.type.name === selectedOption.value
-                        ).length > 0
-                    );
-                })
-            );
-        } else {
-            setFilteredPokemons(
-                globalPokemons.filter((pokemon) => {
-                    return (
-                        pokemon.types.filter(
-                            (t) => t.type.name === selectedOption.value
-                        ).length > 0
-                    );
-                })
-            );
-        }
-    }; */
-
     {
         console.log('user', user, 'has logged in');
     }
@@ -254,7 +200,7 @@ export const PokemonProvider = ({ children }) => {
                 options,
                 selectedOption,
                 filteredPokemons,
-                handleChange,
+
                 uuid,
                 setSelectedOption,
                 setFilterActive,
@@ -269,6 +215,7 @@ export const PokemonProvider = ({ children }) => {
                 favouriteIDs,
                 user,
                 setUser,
+                setFilteredPokemons,
             }}
         >
             {children}
