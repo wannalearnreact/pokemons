@@ -6,7 +6,8 @@ import Button from '../components/Button';
 import '../styles/pages/FavouritesPage.css';
 import { PokemonContext } from '../context/PokemonProvider';
 import { AuthContext } from '../context/AuthContext';
-
+import { db } from '../firebase/config';
+import { doc, updateDoc } from 'firebase/firestore';
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
@@ -21,10 +22,18 @@ const FavouritesPage = () => {
         );
     }, [favouriteIDs]);
 
-    const emptyFavourites = () => {
+    /*  const emptyFavourites = () => {
         setFavouriteIDs([]);
+    }; */
+    const emptyFavourites = async () => {
+        setFavouriteIDs([]);
+        if (user) {
+            const ref = doc(db, 'users', user.uid);
+            await updateDoc(ref, {
+                IDs: [],
+            });
+        }
     };
-
     return (
         <div>
             {favouritePokemons.length > 0 ? (

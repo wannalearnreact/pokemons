@@ -22,8 +22,9 @@ import uuid from 'react-uuid';
 import { motion } from 'framer-motion';
 
 //firebase
-
+import { db } from '../firebase/config';
 import { createContext } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
 
 export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
@@ -181,6 +182,19 @@ export const PokemonProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState(options[0]);
     const [filteredPokemons, setFilteredPokemons] = useState([]);
 
+    useEffect(() => {
+        const fetchFavouriteIDs = async () => {
+            if (user && user.uid) {
+                const userDocRef = doc(db, 'users', user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+                if (userDocSnap.exists()) {
+                    setFavouriteIDs(userDocSnap.data().IDs);
+                }
+            }
+        };
+        fetchFavouriteIDs();
+    }, [user]);
+
     {
         console.log('user', user, 'has logged in');
     }
@@ -200,7 +214,6 @@ export const PokemonProvider = ({ children }) => {
                 options,
                 selectedOption,
                 filteredPokemons,
-
                 uuid,
                 setSelectedOption,
                 setFilterActive,
