@@ -62,7 +62,7 @@ const Pokemon = ({ pokemon }) => {
             whileHover={{ scale: 1.05 }}
             className={pokemon.id >= 650 ? 'pokemon-hidden ' : ' pokemon'}
         >
-            {isShown && (
+            {isShown && user && (
                 <div style={{ position: 'relative' }}>
                     <img
                         onClick={() => handlePokemonClick(pokemon.id)}

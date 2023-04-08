@@ -182,19 +182,6 @@ export const PokemonProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState(options[0]);
     const [filteredPokemons, setFilteredPokemons] = useState([]);
 
-    useEffect(() => {
-        const fetchFavouriteIDs = async () => {
-            if (user && user.uid) {
-                const userDocRef = doc(db, 'users', user.uid);
-                const userDocSnap = await getDoc(userDocRef);
-                if (userDocSnap.exists()) {
-                    setFavouriteIDs(userDocSnap.data().IDs);
-                }
-            }
-        };
-        fetchFavouriteIDs();
-    }, [user]);
-
     {
         console.log('user', user, 'has logged in');
     }

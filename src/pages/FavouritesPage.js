@@ -7,7 +7,7 @@ import '../styles/pages/FavouritesPage.css';
 import { PokemonContext } from '../context/PokemonProvider';
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../firebase/config';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 const FavouritesPage = () => {
     const { favouriteIDs, globalPokemons, setFavouriteIDs } =
         useContext(PokemonContext);
@@ -22,9 +22,19 @@ const FavouritesPage = () => {
         );
     }, [favouriteIDs]);
 
-    /*  const emptyFavourites = () => {
-        setFavouriteIDs([]);
-    }; */
+    useEffect(() => {
+        const fetchFavouriteIDs = async () => {
+            if (user && user.uid) {
+                const userDocRef = doc(db, 'users', user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+                if (userDocSnap.exists()) {
+                    setFavouriteIDs(userDocSnap.data().IDs);
+                }
+            }
+        };
+        fetchFavouriteIDs();
+    }, [user, setFavouriteIDs]);
+
     const emptyFavourites = async () => {
         setFavouriteIDs([]);
         if (user) {
@@ -38,11 +48,10 @@ const FavouritesPage = () => {
         <div>
             {favouritePokemons.length > 0 ? (
                 <>
-                    <h1>
-                        You have {favouritePokemons.length} favourite Pokemons
-                    </h1>
                     <Info
-                        text={`You have ${favouritePokemons.length} favourite ${
+                        text={`${user.email.split('@')[0]} has ${
+                            favouritePokemons.length
+                        } favourite ${
                             favouritePokemons.length === 1
                                 ? 'pokemon'
                                 : 'pokemons'

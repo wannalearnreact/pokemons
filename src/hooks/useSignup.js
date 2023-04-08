@@ -16,6 +16,8 @@ export const useSignup = () => {
                 const user = userCredential.user;
                 const userDocRef = doc(db, 'users', user.uid);
 
+                const IDs = favouriteIDs ? favouriteIDs : [];
+
                 setDoc(userDocRef, {
                     email: user.email,
                     uid: user.uid,
