@@ -8,8 +8,7 @@ import PokemonStats from '../components/PokemonStats';
 import PokemonTypes from '../components/PokemonTypes';
 import { PokemonContext } from '../context/PokemonProvider';
 const SinglePokemonPage = () => {
-    const { getPokemonByID, setIsLoading, isLoading, uuid } =
-        useContext(PokemonContext);
+    const { getPokemonByID, setIsLoading, uuid } = useContext(PokemonContext);
     const [singlePokemon, setSinglePokemon] = useState({});
     const { id } = useParams();
 

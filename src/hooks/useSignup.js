@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
-import { useAuthContext } from './useAuthContext';
+import { PokemonContext } from '../context/PokemonProvider';
 //firebase
+import { useAuthContext } from './useAuthContext';
 import { auth, db } from '../firebase/config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { PokemonContext } from '../context/PokemonProvider';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 export const useSignup = () => {
     const [error, setError] = useState(null);
     const { dispatch } = useAuthContext();
@@ -15,8 +15,6 @@ export const useSignup = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 const userDocRef = doc(db, 'users', user.uid);
-
-                const IDs = favouriteIDs ? favouriteIDs : [];
 
                 setDoc(userDocRef, {
                     email: user.email,

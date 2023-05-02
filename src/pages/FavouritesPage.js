@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useContext } from 'react';
 import Pokemons from '../components/Pokemons';
 import Info from '../components/Info';
@@ -20,7 +20,7 @@ const FavouritesPage = () => {
         favouritePokemons,
         setFavouritePokemons,
     } = useContext(PokemonContext);
-    const { user, dispatch } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         setFavouritePokemons(

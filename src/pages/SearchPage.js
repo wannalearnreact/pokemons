@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import Pokemon from '../components/Pokemon';
 import { PokemonContext } from '../context/PokemonProvider';
 import Dropdown from '../components/Dropdown';
@@ -11,7 +11,6 @@ const SearchPage = () => {
         selectedOption,
         filteredPokemons,
         sortActive,
-        setSorcActive,
     } = useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {

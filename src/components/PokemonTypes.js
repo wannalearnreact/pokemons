@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { useContext } from 'react';
 import { PokemonContext } from '../context/PokemonProvider';
 

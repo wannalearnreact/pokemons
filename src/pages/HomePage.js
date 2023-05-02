@@ -20,7 +20,7 @@ const HomePage = () => {
         setFavouriteIDs,
     } = useContext(PokemonContext);
 
-    const { user, dispatch } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         setIsLoading(true);
