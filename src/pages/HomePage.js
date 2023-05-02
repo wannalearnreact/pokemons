@@ -7,6 +7,7 @@ import { PokemonContext } from '../context/PokemonProvider';
 import { doc, getDoc } from 'firebase/firestore';
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../firebase/config';
+import Dropdown from '../components/Dropdown';
 const HomePage = () => {
     const {
         allPokemons,
@@ -26,8 +27,6 @@ const HomePage = () => {
         fetchAllPokemons();
     }, [offset]);
 
-    useEffect(() => {}, [filteredPokemons]);
-
     useEffect(() => {
         const fetchFavouriteIDs = async () => {
             if (user && user.uid) {
@@ -42,7 +41,8 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div>
+        <div className='container'>
+            <Dropdown />
             {selectedOption.value !== 'all' ? (
                 <Pokemons pokemons={filteredPokemons} />
             ) : (
@@ -53,6 +53,7 @@ const HomePage = () => {
                 <Button
                     text='Load more pokemons'
                     btnFunction={loadMorePokemons}
+                    btnClass='loadmore'
                 />
             )}
         </div>

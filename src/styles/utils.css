@@ -2,3 +2,8 @@
     color: red;
     margin-top: 0.5rem;
 }
+.container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1100px;
+}

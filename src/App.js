@@ -8,9 +8,9 @@ import './index.css';
 import Error from './components/Error';
 import SinglePokemonPage from './pages/SinglePokemonPage';
 import Login from './pages/Login';
-
 import Protected from './components/Protected';
 import Signup from './pages/Signup';
+import Info from './components/Info';
 import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
@@ -54,7 +54,15 @@ function App() {
                             element={<SinglePokemonPage />}
                         />
 
-                        <Route path='*' element={<Error />} />
+                        <Route
+                            path='*'
+                            element={
+                                <Info
+                                    text='Non existing route!'
+                                    height={` calc(-80px + 100vh) `}
+                                />
+                            }
+                        />
                     </Routes>
                 </BrowserRouter>
             )}

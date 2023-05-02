@@ -7,21 +7,16 @@ import '../styles/colors.css';
 import addFavourite from '../assets/icons/bookmark-add.svg';
 import removeFavourite from '../assets/icons/bookmark-remove.svg';
 import { PokemonContext } from '../context/PokemonProvider';
-import { db, auth } from '../firebase/config';
+
+//firebase
+import { db } from '../firebase/config';
 import { AuthContext } from '../context/AuthContext';
-import {
-    doc,
-    updateDoc,
-    arrayUnion,
-    arrayRemove,
-    getDoc,
-    setDoc,
-} from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 
 const Pokemon = ({ pokemon }) => {
     const { motion, favouriteIDs, setFavouriteIDs } =
         useContext(PokemonContext);
-    const { user, dispatch } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const [isShown, setIsShown] = useState(false);
 
@@ -63,11 +58,10 @@ const Pokemon = ({ pokemon }) => {
             className={pokemon.id >= 650 ? 'pokemon-hidden ' : ' pokemon'}
         >
             {isShown && user && (
-                <div style={{ position: 'relative' }}>
+                <div className='pokemon-add'>
                     <img
                         onClick={() => handlePokemonClick(pokemon.id)}
                         className={`${isShown ? 'pokemon-favourite' : ''}`}
-                        style={{ width: '64px', height: '64px' }}
                         src={isFavourite ? removeFavourite : addFavourite}
                     />
                 </div>

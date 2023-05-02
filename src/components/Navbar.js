@@ -1,31 +1,23 @@
 import { useContext, useEffect, useState } from 'react';
-
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 import '../styles/components/Navbar.css';
+
 import Button from './Button';
 import search from '../assets/images/search.png';
-import Dropdown from './Dropdown';
-import Filter from '../components/Filter';
 import favourites from '../assets/images/favourites.png';
+
 import { PokemonContext } from '../context/PokemonProvider';
 import { useLogout } from '../hooks/useLogout';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
-    const {
-        searchedValue,
-        setSearchedValue,
-        filteredPokemons,
-        filterActive,
-        sortActive,
-        setSortActive,
-        favouriteIDs,
-    } = useContext(PokemonContext);
+    const { searchedValue, setSearchedValue, filteredPokemons, favouriteIDs } =
+        useContext(PokemonContext);
     const { logout } = useLogout();
     const { user } = useContext(AuthContext);
 
-    const location = useLocation();
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
 
@@ -45,11 +37,6 @@ const Navbar = () => {
         }
     };
 
-    const handleSearch = (e) => {
-        if (!location.pathname.includes('search')) {
-            navigate('/search');
-        }
-    };
     const handleValueChange = (e) => {
         setSearchedValue(e.target.value);
     };
@@ -68,58 +55,54 @@ const Navbar = () => {
 
     useEffect(() => {}, [searchedValue, filteredPokemons]);
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-            <div style={{ display: 'flex' }}>
+        <nav className={` ${scrolled ? 'scrolled' : ''}`}>
+            <div className={`navbar container`}>
                 <Link to='/' className='navbar-brand' />
-                {filterActive && (
-                    <div className='sort-container'>
-                        <Dropdown />
-                        <div
-                            onClick={() => setSortActive(!sortActive)}
-                            className='alphabet-sort'
-                        ></div>
+                <div className='navbar-wrapper'>
+                    <div className='navbar-search'>
+                        <img
+                            className='wrapper-img '
+                            src={search}
+                            alt='search'
+                        />
+                        <input
+                            type='text'
+                            placeholder='Search...'
+                            aria-label='Search'
+                            value={searchedValue}
+                            onChange={handleValueChange}
+                            onKeyDown={handleKeyDown}
+                        />
                     </div>
-                )}
-            </div>
-            <div className='navbar-sort'>
-                {user && (
-                    <Link to='/favourites' className='navbar-favourites'>
-                        <img src={favourites} alt='favourites' />
-                        {favouriteIDs.length > 0 && (
-                            <p className='navbar-favourites-count'>
-                                {favouriteIDs.length}
-                            </p>
+                    <div className='wrapper-buttons'>
+                        {user && (
+                            <Link
+                                to='/favourites'
+                                className='wrapper-favourites'
+                            >
+                                <img src={favourites} alt='favourites' />
+                                {favouriteIDs.length > 0 && (
+                                    <p className='favourites-count'>
+                                        {favouriteIDs.length}
+                                    </p>
+                                )}
+                            </Link>
                         )}
-                    </Link>
-                )}
-
-                <div className='navbar-search'>
-                    <img className='navbar-img ' src={search} alt='' />
+                        {user ? (
+                            <Button
+                                text='Logout'
+                                btnFunction={logout}
+                                btnClass='navbar'
+                            />
+                        ) : (
+                            <Button
+                                text='Login'
+                                btnFunction={navigateToLogin}
+                                btnClass='navbar'
+                            />
+                        )}
+                    </div>
                 </div>
-                <input
-                    type='text'
-                    placeholder='Find pokemon...'
-                    aria-label='Search'
-                    value={searchedValue}
-                    onChange={handleValueChange}
-                    onKeyDown={handleKeyDown}
-                />
-
-                <Filter />
-
-                {user ? (
-                    <Button
-                        text='Logout'
-                        btnFunction={logout}
-                        btnClass='navbar'
-                    />
-                ) : (
-                    <Button
-                        text='Login'
-                        btnFunction={navigateToLogin}
-                        btnClass='navbar'
-                    />
-                )}
             </div>
         </nav>
     );

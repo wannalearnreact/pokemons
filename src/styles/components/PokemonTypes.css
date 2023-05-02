@@ -1,6 +1,7 @@
 .types-svg {
     display: flex;
     margin: 1rem 0;
+    justify-content: center;
 }
 .justify {
     justify-content: center;

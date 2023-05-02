@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+//pokemon icon types
 import bug from '../assets/icons/bug.svg';
 import dark from '../assets/icons/dark.svg';
 import dragon from '../assets/icons/dragon.svg';
@@ -21,10 +22,7 @@ import water from '../assets/icons/water.svg';
 import uuid from 'react-uuid';
 import { motion } from 'framer-motion';
 
-//firebase
-import { db } from '../firebase/config';
 import { createContext } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
 
 export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
@@ -37,7 +35,7 @@ export const PokemonProvider = ({ children }) => {
     const [filterActive, setFilterActive] = useState(false);
     const [sortActive, setSortActive] = useState(null);
     const [favouriteIDs, setFavouriteIDs] = useState([]);
-
+    const [favouritePokemons, setFavouritePokemons] = useState([]);
     const [user, setUser] = useState(false);
 
     const url = 'https://pokeapi.co/api/v2/';
@@ -141,21 +139,11 @@ export const PokemonProvider = ({ children }) => {
         }
     };
 
-    /*  useEffect(() => {
-        fetchAllPokemons();
-    }, [offset]); */
-
     useEffect(() => {
         fetchGlobalPokemons();
     }, []);
 
-    /*   useEffect(() => {
-        setIsLoading(true);
-        Promise.all([fetchAllPokemons(), fetchGlobalPokemons()]).finally(() =>
-            setIsLoading(false)
-        );
-    }, [offset]); */
-    // DROPDOWN
+    // dropdown options
 
     const options = [
         { value: 'all', label: 'all' },
@@ -182,9 +170,6 @@ export const PokemonProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState(options[0]);
     const [filteredPokemons, setFilteredPokemons] = useState([]);
 
-    {
-        console.log('user', user, 'has logged in');
-    }
     return (
         <PokemonContext.Provider
             value={{
@@ -216,6 +201,8 @@ export const PokemonProvider = ({ children }) => {
                 user,
                 setUser,
                 setFilteredPokemons,
+                favouritePokemons,
+                setFavouritePokemons,
             }}
         >
             {children}

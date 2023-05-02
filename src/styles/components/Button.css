@@ -20,8 +20,17 @@
 .btn-form {
     color: white;
     background-color: #333;
+    /*   color: #333; */
     font-size: 1rem;
-    padding: 0.7rem 1rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.btn-loadmore {
+    background-color: white;
+    color: #333;
+    font-size: 1rem;
+    padding: 1rem;
+    margin-top: 1rem;
 }
 .btn-base:hover {
     transform: scale(1.05);

@@ -12,6 +12,9 @@ const Dropdown = () => {
         setFilteredPokemons,
         globalPokemons,
         allPokemons,
+        sortActive,
+        setSortActive,
+        favouritePokemons,
     } = useContext(PokemonContext);
     const location = useLocation();
     const [defaultOption, setDefaultOption] = useState(options[0]); // default option state
@@ -40,9 +43,9 @@ const Dropdown = () => {
                     );
                 })
             );
-        } else {
+        } else if (location.pathname === '/favourites') {
             setFilteredPokemons(
-                globalPokemons.filter((pokemon) => {
+                favouritePokemons.filter((pokemon) => {
                     return (
                         pokemon.types.filter(
                             (t) => t.type.name === selectedOption.value
@@ -61,13 +64,19 @@ const Dropdown = () => {
     }, [location, defaultOption, setSelectedOption]);
 
     return (
-        <Select
-            className='dropdown'
-            onChange={handleTypeChange}
-            options={options}
-            value={selectedOption}
-            defaultValue={defaultOption}
-        />
+        <div className='dropdown-container'>
+            <Select
+                className='dropdown'
+                onChange={handleTypeChange}
+                options={options}
+                value={selectedOption}
+                defaultValue={defaultOption}
+            />
+            <div
+                onClick={() => setSortActive(!sortActive)}
+                className='dropdown-sort'
+            ></div>
+        </div>
     );
 };
 

@@ -8,11 +8,19 @@ import { PokemonContext } from '../context/PokemonProvider';
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import Dropdown from '../components/Dropdown';
+
 const FavouritesPage = () => {
-    const { favouriteIDs, globalPokemons, setFavouriteIDs } =
-        useContext(PokemonContext);
+    const {
+        favouriteIDs,
+        globalPokemons,
+        setFavouriteIDs,
+        filteredPokemons,
+        selectedOption,
+        favouritePokemons,
+        setFavouritePokemons,
+    } = useContext(PokemonContext);
     const { user, dispatch } = useContext(AuthContext);
-    const [favouritePokemons, setFavouritePokemons] = useState([]);
 
     useEffect(() => {
         setFavouritePokemons(
@@ -20,7 +28,7 @@ const FavouritesPage = () => {
                 favouriteIDs.includes(pokemon.id)
             )
         );
-    }, [favouriteIDs]);
+    }, [favouriteIDs, selectedOption]);
 
     useEffect(() => {
         const fetchFavouriteIDs = async () => {
@@ -44,10 +52,12 @@ const FavouritesPage = () => {
             });
         }
     };
+
     return (
-        <div>
+        <div className='container'>
             {favouritePokemons.length > 0 ? (
                 <>
+                    <Dropdown />
                     <Info
                         text={`${user.email.split('@')[0]} has ${
                             favouritePokemons.length
@@ -56,23 +66,24 @@ const FavouritesPage = () => {
                                 ? 'pokemon'
                                 : 'pokemons'
                         }`}
-                        fontSize='2rem'
                     />
-                    <Pokemons pokemons={favouritePokemons} />
+                    {selectedOption.value !== 'all' ? (
+                        <Pokemons pokemons={filteredPokemons} />
+                    ) : (
+                        <Pokemons pokemons={favouritePokemons} />
+                    )}
                     <Button
                         btnFunction={emptyFavourites}
                         text='Empty Favourites'
+                        btnClass='loadmore'
                     />
                 </>
             ) : (
                 <Info
                     text='There are no favourites...'
                     height='calc(100vh - 80px)'
-                    fontSize='5rem'
                 />
             )}
-
-            {}
         </div>
     );
 };

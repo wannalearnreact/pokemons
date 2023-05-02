@@ -47,6 +47,13 @@
     cursor: pointer;
     right: 0;
 }
+.pokemon-add {
+    position: relative;
+}
+.pokemon-add img {
+    width: 64px;
+    height: 64px;
+}
 .color-fire {
     color: #ff7402;
 }

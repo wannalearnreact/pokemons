@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { PokemonContext } from '../context/PokemonProvider';
 
 import '../styles/components/PokemonStats.css';
+
 const PokemonStats = ({ singlePokemon }) => {
     const { uuid } = useContext(PokemonContext);
     useEffect(() => {}, [singlePokemon]);

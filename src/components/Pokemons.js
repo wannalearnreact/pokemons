@@ -1,14 +1,13 @@
 import { useContext } from 'react';
-
 import Pokemon from './Pokemon';
+
 import 'react-loading-skeleton/dist/skeleton.css';
 import '../styles/components/Pokemons.css';
 import Loading from './Loading';
 import { PokemonContext } from '../context/PokemonProvider';
 
 const Pokemons = ({ pokemons }) => {
-    const { isLoading, uuid, sortActive, favouriteIDs } =
-        useContext(PokemonContext);
+    const { isLoading, uuid, sortActive } = useContext(PokemonContext);
 
     function sortAndRemoveDuplicates(array) {
         if (sortActive === false) {
@@ -34,15 +33,12 @@ const Pokemons = ({ pokemons }) => {
             }, []);
         }
     }
-    {
-        console.log('IDs', favouriteIDs);
-    }
 
     return (
         <div className='pokemon-container'>
             {isLoading
                 ? Array.from({ length: 10 }).map((i) => (
-                      <Loading key={i} height='300px' />
+                      <Loading key={uuid()} height='300px' />
                   ))
                 : sortAndRemoveDuplicates(pokemons).map((item) => (
                       <Pokemon key={uuid()} pokemon={item} />
